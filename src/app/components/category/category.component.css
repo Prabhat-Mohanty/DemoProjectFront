@@ -1,0 +1,163 @@
+/* Custom checkbox styles */
+.form-check-input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.form-check-label {
+  display: flex;
+  position: relative;
+  padding-left: 80px;
+  cursor: pointer;
+  font-size: large;
+}
+
+.form-check-label:before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  text-align: center;
+  line-height: 16px;
+  font-size: 14px;
+  font-weight: bold;
+  color: transparent;
+}
+
+.form-check-input:checked + .form-check-label:before {
+  background-color: #2196f3;
+  border-color: #2196f3;
+  color: #fff;
+  content: "\2713";
+}
+
+.form-check-input:focus + .form-check-label:before {
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.5);
+}
+
+/* Hover effects */
+.form-check-label:hover:before {
+  border-color: #2196f3;
+}
+
+.form-check-input:checked + .form-check-label:hover:before {
+  background-color: #2196f3;
+}
+
+.form-check-input:focus + .form-check-label:hover:before {
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.5);
+}
+.scrollable-div {
+  max-height: 800px;
+  overflow: auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.scrollable-div::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scrollable-div::-webkit-scrollbar-thumb {
+  /* background-color: #666; */
+  background-color: #051242;
+  border-radius: 5px;
+}
+
+.scrollable-div::-webkit-scrollbar-track {
+  background-color: #eee;
+  border-radius: 5px;
+}
+
+.filter {
+  text-align: center;
+  font-weight: bold;
+}
+
+hr {
+  position: relative;
+  border: none;
+  height: 3px;
+  background-color: #051242;
+  margin: 20px 20px;
+}
+
+hr::before,
+hr::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 10px;
+  background-color: inherit;
+  filter: blur(3px);
+}
+
+hr::before {
+  left: -10px;
+}
+
+hr::after {
+  right: -10px;
+}
+
+/* card */
+
+/* .card {
+  max-width: 18rem;
+  margin: 1rem;
+} */
+
+.card-img-top {
+  height: 300px; /* set a fixed height for the image */
+  object-fit: cover; /* make the image fit inside the container */
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.card-text {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.card:hover {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* add a box shadow on hover */
+}
+
+.card:hover .card-img-top {
+  transform: scale(1.1); /* scale up the image on hover */
+  transition: transform 0.3s ease-in-out; /* add a smooth transition effect */
+}
+
+.card {
+  max-width: 18rem;
+  margin: 1rem;
+  position: relative; /* add position property for tooltip */
+}
+
+.card .card-img-top:hover::before {
+  content: attr(title);
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: black; /* set the background color to black */
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  z-index: 1;
+  white-space: nowrap;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}

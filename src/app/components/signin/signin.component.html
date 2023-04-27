@@ -1,0 +1,69 @@
+<!-- spinner -->
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="rgb(50, 105, 138)" type="square-jelly-box"
+  [fullScreen]="true">
+  <h3 style="color: rgb(255, 255, 255);"> Please wait it's Loading... </h3>
+</ngx-spinner>
+
+<section class="signup-area ptb-100">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="signup-form">
+          <div class="section-tittle text-center" style="color: #5170ec;">
+            <u>
+              <h2 style="color: #5170ec;">Sign In</h2>
+            </u>
+          </div>
+          <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+            <div class="row">
+              <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                  <input class="form-control" type="email" name="email" placeholder="Email" formControlName="Email"
+                    autocomplete="Email">
+                  <!-- Validation -->
+                  <div *ngIf="Email && Email.invalid && Email.touched">
+                    <div class="text-danger" *ngIf="Email?.errors?.['required']">Email is required</div>
+                  </div>
+                  <!-- Validation -->
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                  <input class="form-control" type="password" name="password" placeholder="Password"
+                    formControlName="Password" autocomplete="current-password">
+                  <!-- Validation -->
+                  <div *ngIf="Password && Password.invalid && Password.touched">
+                    <div class="text-danger" *ngIf="Password?.errors?.['required']">Password is required</div>
+                  </div>
+                  <!-- Validation -->
+                </div>
+              </div>
+              <div class="col-12 text-start">
+                <a routerLink="/forget-password">
+                  <p class="al-acc">
+                    Forget Password&nbsp;?
+                  </p>
+                </a>
+              </div>
+              <div class="col-12 text-center">
+                <button class="box-btn signup-btn" [disabled]="loginForm.invalid">
+                  Sign In
+                </button>
+              </div>
+              <div class="col-12 text-center">
+                <p class="al-acc">
+                  Not a Member&nbsp;?
+                  <a routerLink="/signup">
+                    <u>
+                      <h6 style="color: #5170ec;">Sign Up</h6>
+                    </u>
+                  </a>
+                </p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
