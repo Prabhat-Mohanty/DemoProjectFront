@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -11,12 +11,18 @@ import { AuthService } from 'src/app/auth/auth.service';
   styleUrls: ['./signin.component.css'],
 })
 export class SigninComponent {
+  isVisible: boolean = false;
+
   constructor(
     public auth: AuthService,
     private toast: ToastrService,
     private router: Router,
     private spinner: NgxSpinnerService
-  ) {}
+  ) {
+    this.auth.isVisible.subscribe((res) => {
+      this.isVisible = res;
+    });
+  }
 
   loginForm = new FormGroup({
     Email: new FormControl('', [Validators.required, Validators.email]),
@@ -39,6 +45,7 @@ export class SigninComponent {
           localStorage.setItem('token', res.token);
           this.toast.success('Login Successfull', 'Success');
           this.spinner.hide();
+          this.auth.isLogged.next(true);
           this.router.navigate(['']);
         }
       },

@@ -1,11 +1,14 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  isVisible = new Subject<boolean>();
+  isLogged = new BehaviorSubject<boolean>(this.isLoggedIn());
+
   constructor(private http: HttpClient) {}
 
   baseUrl: string = 'https://localhost:7085/api/Authentication';
@@ -26,7 +29,6 @@ export class AuthService {
 
   //Forget Password
   forgetPassword(email: string | null | undefined) {
-    // const url = `${this.baseUrl}/forget-password`;
     const url = `${this.baseUrl}/forget-password?email=${email}`;
     return this.http.post(url, null);
   }
@@ -73,5 +75,23 @@ export class AuthService {
   //Get Token
   getoken(): string | null {
     return localStorage.getItem('token');
+  }
+
+  //Logout
+  logout() {
+    return localStorage.removeItem('token');
+  }
+
+  etoken = localStorage.getItem('token');
+  //Get Profile Details
+  getUpdateProfile(email: string) {
+    const headers = new HttpHeaders()
+      .set('accept', '*/*')
+      .set('Authorization', 'Bearer ' + this.etoken);
+
+    return this.http.get(
+      'https://localhost:7085/api/Authentication/updateProfile?email=' + email,
+      { headers }
+    );
   }
 }

@@ -1,0 +1,64 @@
+<!-- spinner -->
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="rgb(50, 105, 138)" type="square-jelly-box"
+  [fullScreen]="true">
+  <h3 style="color: rgb(255, 255, 255);"> Please wait it's Loading... </h3>
+</ngx-spinner>
+<section *ngIf="book">
+  <div class="row">
+    <div class="col-md-5 text-center">
+      <div id="carouselExampleControls" class="carousel slide image-position" data-bs-ride="carousel">
+        <div class="BookName">
+          {{ book.bookName }}
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item" *ngFor="let bookImage of book.images; let i=index"
+            [ngClass]="{ 'active': i === 0 }">
+            <img [src]="'https://localhost:7085/img/'+bookImage" [alt]="book.bookName" class="d-block w-100 image-view">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+          data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+          data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+    <div class="col-md-7">
+      <div class="details">
+        <div class="container">
+          <div class="BookDiscription">
+            Description
+          </div>
+          <div *ngIf="book.description.length > 0" class="ps-2 discription">
+            {{book.description}}
+          </div>
+          <div *ngIf="book.description.length < 0">
+            <strong>No Discription Avaliable</strong>
+          </div>
+          <div class="mt-3">
+            <button [routerLink]="" class="box-btn review mx-1 mt-4 mb-5">Review</button>
+            <button [ngClass]="checkAval ? 'box-btn check mx-1 mt-4 mb-5' : 'pragraph'"
+              (click)="checkStock()">{{checkAval ? 'Tap to check availability' : 'Current stock is ' +
+              book.actualStocks}}</button>
+
+            <form #rentdetail="ngForm" (ngSubmit)="onSubmit(rentdetail.value)">
+              <label for="days">For how many days do you want this book?</label>
+              <div>
+                <button type="button" (click)="decrement()" class="ms-1"><i class="fa-solid fa-minus"></i></button>
+                <input type="text" class="form-control" id="days" name="days" [value]="days" disabled />
+                <button type="button" (click)="increment()" class="ms-1"><i class="fa-solid fa-plus"></i></button>
+              </div>
+              <input type="hidden" name="BookId" [value]="book.id" [(ngModel)]="book.id">
+              <button type="submit" [routerLink]="" class="box-btn rent mx-1 mt-4 mb-5">Apply for rent</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

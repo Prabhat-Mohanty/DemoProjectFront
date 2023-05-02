@@ -38,8 +38,6 @@
     </div>
   </div>
 </header>
-
-
 <div class="navbar-area">
   <div class="main-nav">
     <div class="container">
@@ -53,7 +51,7 @@
           <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
             <ul class="navbar-nav text-left">
               <li class="nav-item">
-                <a href="#" class="nav-link">Home</a>
+                <a routerLink="" class="nav-link">Home</a>
               </li>
               <li class="nav-item">
                 <a routerLink="aboutus" class="nav-link">About</a>
@@ -110,14 +108,14 @@
                     <a routerLink="signup" class="nav-link">Sign Up</a>
                   </li>
                   <li class="nav-item">
-                    <a routerLink="category/G1" class="nav-link">Sign Up</a>
+                    <a routerLink="category/arts" class="nav-link">Category</a>
                   </li>
                   <li class="nav-item">
                     <a routerLink="signin" class="nav-link">Sign In</a>
                   </li>
-                  <li class="nav-item">
+                  <!-- <li class="nav-item">
                     <a routerLink="reset-password" class="nav-link">Reset Password</a>
-                  </li>
+                  </li> -->
                   <li class="nav-item">
                     <a routerLink="user-reset-password" class="nav-link">User Reset Password</a>
                   </li>
@@ -137,11 +135,47 @@
               </li>
             </ul>
           </div>
-          <div class="nav-btn">
+          <!-- <div class="nav-btn">
             <a routerLink="signup" class="box-btn">Sign Up</a>
           </div>
           <div class="nav-btn">
             <a routerLink="signin" class="box-btn">Sign In</a>
+          </div> -->
+
+
+          <div class="nav-btn" *ngIf="isLogged == true">
+            <ul class="navbar-nav text-right" style="text-align: end;">
+              <li class="nav-item">
+                <i class="fa-solid fa-user fa-2xl" style="color: #ffffff;"></i>
+                <ul class="dropdown-menu">
+                  <li class="nav-item">
+                    <a routerLink="updateprofile" class="nav-link">Edit Profile</a>
+                  </li>
+                  <li class="nav-item">
+                    <a routerLink="user-reset-password" class="nav-link">Change Password</a>
+                  </li>
+                  <li class="nav-item">
+                    <a routerLink="" class="nav-link" (click)="logout()">Logout</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <p *ngIf="isLogged == true">Hello Buddy</p>
+          <div class="nav-btn" *ngIf="!isLogged">
+            <ul class="navbar-nav text-right">
+              <li class="nav-item">
+                <i class="fa-solid fa-user fa-2xl" style="color: #ffffff;"></i>
+                <ul class="dropdown-menu">
+                  <li class="nav-item">
+                    <a routerLink="signin" class="nav-link">Sign in</a>
+                  </li>
+                  <li class="nav-item">
+                    <a routerLink="signup" class="nav-link">Sign up</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
           </div>
         </div>
       </nav>

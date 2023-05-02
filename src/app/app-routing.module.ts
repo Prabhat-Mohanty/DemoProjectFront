@@ -13,11 +13,24 @@ import { CategoryComponent } from './components/category/category.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { UserPasswordResetComponent } from './components/user-password-reset/user-password-reset.component';
+import { BookDetailComponent } from './components/book-detail/book-detail.component';
+import { BookOrderedComponent } from './components/book-ordered/book-ordered.component';
+import { AdminComponent } from './components/home/admin/admin.component';
+import { SigninModalComponent } from './components/signin-modal/signin-modal.component';
+import { UpdateProfileComponent } from './components/update-profile/update-profile.component';
 
 const routes: Routes = [
   {
     path: '',
     component: UserComponent,
+  },
+  {
+    path: 'Admin',
+    component: AdminComponent,
+  },
+  {
+    path: 'modalsignin',
+    component: SigninModalComponent,
   },
   {
     path: 'signin',
@@ -47,6 +60,21 @@ const routes: Routes = [
   {
     path: 'category/:genre',
     component: CategoryComponent,
+  },
+  {
+    path: 'bookdetails/:bid',
+    canActivate: [AuthGuard],
+    component: BookDetailComponent,
+  },
+  {
+    path: 'updateprofile',
+    canActivate: [AuthGuard],
+    component: UpdateProfileComponent,
+  },
+  {
+    path: 'bookOrdered',
+    canActivate: [AuthGuard],
+    component: BookOrderedComponent,
   },
   {
     path: 'reset-password',

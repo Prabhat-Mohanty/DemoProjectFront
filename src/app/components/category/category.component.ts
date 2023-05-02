@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { event } from 'jquery';
 import { BookService } from 'src/app/service/book.service';
 
 @Component({
@@ -12,7 +11,8 @@ export class CategoryComponent implements OnInit {
   books: any;
   imageSrc = '/bookImages/B1/10minutes.jpg';
   isChecked = false;
-
+  genre: string = '';
+  genres: string[] = [];
   constructor(
     private activatedRoute: ActivatedRoute,
     private book: BookService
@@ -209,35 +209,54 @@ export class CategoryComponent implements OnInit {
       select: false,
     },
   ];
-  genre: string = '';
 
   ngOnInit() {
     this.genre = this.activatedRoute.snapshot.params['genre'];
+    for (let g = 0; g < this.slidesStore.length; g++) {
+      if (this.slidesStore[g].genre == this.genre) {
+        this.slidesStore[g].select = true;
+      }
+    }
+
+    this.genres = [];
+    for (let index = 0; index < this.slidesStore.length; index++) {
+      if (this.slidesStore[index].select == true) {
+        this.genres.push(this.slidesStore[index].genre);
+      }
+    }
+    this.callAPI(this.genres);
   }
+
+  aOG: string[] = [];
+  allbook: string[] = [];
+
   onlo($event: any) {
-   
-    var genres: string[] = [];
     const id = $event.target.value;
     const check = $event.target.checked;
-
-    genres = this.slidesStore.map((d: any) => {
-      if (d.genre == id) {
-        d.select = check;
-        return d;
+    for (let g = 0; g < this.slidesStore.length; g++) {
+      if (this.slidesStore[g].genre == id) {
+        this.slidesStore[g].select = check;
       }
-      return d;
-    });
-
-    var s: string[] = [];
-    genres = genres.map((d: any) => {
-      if (d.select == true) {
-        s.push(d.genre);
-        return d.genre;
-      } else {
-        return '';
+    }
+    this.aOG = [];
+    for (let index = 0; index < this.slidesStore.length; index++) {
+      if (this.slidesStore[index].select == true) {
+        this.aOG.push(this.slidesStore[index].genre);
       }
-    });
-    this.book.getBooksByGenre(s).subscribe(
+    }
+    for (let index = 0; index < this.slidesStore.length; index++) {
+      this.allbook.push(this.slidesStore[index].genre);
+    }
+
+    if (this.aOG.length < 1) {
+      this.callAPI(this.allbook);
+    } else {
+      this.callAPI(this.aOG);
+    }
+  }
+
+  callAPI(genre: string[]) {
+    this.book.getBooksByGenre(genre).subscribe(
       (data) => {
         this.books = data;
       },

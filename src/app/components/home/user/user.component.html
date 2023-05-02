@@ -6,7 +6,7 @@
           <div class="col-lg-6">
             <div class="banner-content">
               <h1>
-                Trusted Effective Service and Solutions
+                Today a reader, tomorrow a leader.
               </h1>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, et sed do eiusmod tempor incididunt labore
@@ -60,7 +60,7 @@
       <owl-carousel-o [options]="customOptions">
         <ng-container *ngFor="let slide of slidesStore">
           <ng-template carouselSlide [id]="slide.genre">
-            <a [owlRouterLink]="['category/'+slide.genre]"><img class="h" [src]="slide.src" [alt]="slide.alt"
+            <a [routerLink]="'category/'+slide.genre"><img class="h" [src]="slide.src" [alt]="slide.alt"
                 [title]="slide.title"></a>
             <div class="px-5">{{slide.title}}</div>
           </ng-template>
@@ -72,7 +72,7 @@
 
 
 
-<section class="home-service-area pt-100 pb-70">
+<!-- <section class="home-service-area pt-100 pb-70">
   <div class="container">
     <div class="section-title">
       <span>Smart Services</span>
@@ -173,7 +173,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 
 <section class="home-company-area bg-color">
@@ -434,23 +434,19 @@
           <ul>
             <li>
               <i class="flaticon-correct"></i>
-              Freelancing Traning Course
+              Best rated books
             </li>
             <li>
               <i class="flaticon-correct"></i>
-              Technological Consultation
+              Place to read books in our library
             </li>
             <li>
               <i class="flaticon-correct"></i>
-              Monthly Paid Workspace
+              Books with good condition
             </li>
             <li>
               <i class="flaticon-correct"></i>
-              IT Learning Institute
-            </li>
-            <li>
-              <i class="flaticon-correct"></i>
-              Digital Marketing
+              Books of all kind of genre
             </li>
           </ul>
           <a href="#" class="box-btn">Lets Talk!</a>
@@ -591,7 +587,7 @@
 </section> -->
 
 
-<section class="home-contact-area bg-color ptb-100">
+<!-- <section class="home-contact-area bg-color ptb-100">
   <div class="container">
     <div class="section-title">
       <span>Contact Us</span>
@@ -657,4 +653,4 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->

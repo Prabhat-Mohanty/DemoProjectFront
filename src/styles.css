@@ -418,7 +418,7 @@ Go Top Style*/
 .box-btn {
   font-size: 16px;
   color: #ffffff;
-  padding: 15px 25px;
+  padding: 13px 22px;
   line-height: 1;
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
@@ -864,6 +864,7 @@ Navbar Area Css
   padding-bottom: 15px;
   padding-left: 0;
   padding-right: 0;
+  margin-right: 20px;
 }
 
 .navbar-area .main-nav .navbar .navbar-nav .nav-item a {
@@ -1156,11 +1157,13 @@ Banner Area Css
   font-size: 55px;
   color: #ffffff;
   margin: 0 0 30px;
+  line-height: initial;
 }
 
 .banner-area .banner-content p {
   color: #fff;
   padding-right: 0%;
+  line-height: normal;
 }
 
 .banner-area .banner-content .banner-btn {
@@ -5927,7 +5930,7 @@ Footer Area Css
 }
 
 .footer-area .copy-area {
-  margin-top: 70px;
+  margin-top: 6px;
   padding: 20px 0;
   border-top: 1px solid #2a355e;
 }
@@ -6680,7 +6683,20 @@ Banner Area Three Style
   background: none;
 }
 
-.filter{
+.filter {
   font-size: large;
-  
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.my-dialog-style {
+  max-width: 53vw;
+  position: static;
 }

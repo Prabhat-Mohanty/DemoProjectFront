@@ -26,6 +26,15 @@ import { CategoryComponent } from './components/category/category.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { UserPasswordResetComponent } from './components/user-password-reset/user-password-reset.component';
+import { BookDetailComponent } from './components/book-detail/book-detail.component';
+import { BookOrderedComponent } from './components/book-ordered/book-ordered.component';
+import { SigninModalComponent } from './components/signin-modal/signin-modal.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { UpdateProfileComponent } from './components/update-profile/update-profile.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +54,10 @@ import { UserPasswordResetComponent } from './components/user-password-reset/use
     ResetPasswordComponent,
     ForgetPasswordComponent,
     UserPasswordResetComponent,
+    BookDetailComponent,
+    BookOrderedComponent,
+    SigninModalComponent,
+    UpdateProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,6 +76,11 @@ import { UserPasswordResetComponent } from './components/user-password-reset/use
       positionClass: 'toast-top-right',
     }), // ToastrModule added
     CarouselModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

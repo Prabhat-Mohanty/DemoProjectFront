@@ -4,11 +4,15 @@
   <h3 style="color: rgb(255, 255, 255);"> Please wait it's Loading... </h3>
 </ngx-spinner>
 
-<section class="signup-area ptb-100">
+<section [ngClass]="isVisible ? 'signup-area' : 'signup-area ptb-100'">
   <div class="container">
     <div class="row">
       <div class="col-12">
         <div class="signup-form">
+          <div mat-dialog-actions>
+            <button mat-icon-button class="closeButton" [style.visibility]="isVisible ? 'visible' : 'hidden'"
+              matDialogClose>X</button>
+          </div>
           <div class="section-tittle text-center" style="color: #5170ec;">
             <u>
               <h2 style="color: #5170ec;">Sign In</h2>

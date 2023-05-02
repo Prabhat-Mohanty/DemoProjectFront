@@ -1,0 +1,232 @@
+<!-- spinner -->
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="rgb(50, 105, 138)" type="square-jelly-box"
+  [fullScreen]="true">
+  <h3 style="color: rgb(255, 255, 255);"> Please wait it's Loading... </h3>
+</ngx-spinner>
+
+
+<section class="signup-area ptb-100" *ngIf="userDetails">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="signup-form">
+          <div class="section-tittle text-center">
+            <h2 style="color: #5170ec;"> <u> Update your profile</u></h2>
+          </div>
+          <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+            <div class="row">
+              <div class="row">
+                <div class="col-md-4 col-sm-4">
+                  <div class="form-group">
+                    <label for="Firstname">First Name</label>
+                    <input class="form-control" type="text" name="Firstname" id="Firstname" placeholder="Firstname"
+                      formControlName="FirstName" [value]="userDetails.firstName">
+                    <!-- Validation -->
+                    <div *ngIf="FirstName && FirstName.invalid && FirstName.touched">
+                      <div class="text-danger" *ngIf="FirstName?.errors?.['required']">First Name is required</div>
+                      <div class="text-danger" *ngIf="FirstName?.errors?.['pattern']">You cannot use space or numbers
+                      </div>
+                    </div>
+                    <!-- Validation -->
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                  <div class="form-group">
+                    <label for="Middlename">Middle Name</label>
+                    <input class="form-control" type="text" name="Middlename" id="Middlename" placeholder="MiddleName"
+                      formControlName="MiddleName">
+                    <!-- Validation -->
+                    <div *ngIf="MiddleName && MiddleName.invalid && MiddleName.touched">
+                      <div class="text-danger" *ngIf="MiddleName?.errors?.['required']">Middle Name is required</div>
+                      <div class="text-danger" *ngIf="MiddleName?.errors?.['pattern']">You cannot use space or numbers
+                      </div>
+                    </div>
+                    <!-- Validation -->
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                  <div class="form-group">
+                    <label for="Lastname">Last Name</label>
+                    <input class="form-control" type="text" name="Lastname" id="Lastname" placeholder="Lastname"
+                      formControlName="LastName">
+                    <!-- Validation -->
+                    <div *ngIf="LastName && LastName.invalid && LastName.touched">
+                      <div class="text-danger" *ngIf="LastName?.errors?.['required']">Last Name is required</div>
+                      <div class="text-danger" *ngIf="LastName?.errors?.['pattern']">You cannot use space or numbers
+                      </div>
+                    </div>
+                    <!-- Validation -->
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4 col-sm-4">
+                  <div class="form-group">
+                    <label for="Gender">Gender</label>
+                    <select class="form-control" formControlName="Gender">
+                      <option disabled value="">Select Gender</option>
+                      <option *ngFor="let gender of genders" [value]="gender">{{gender}}</option>
+                    </select>
+                    <!-- Validation -->
+                    <div *ngIf="Gender && Gender.invalid && Gender.touched">
+                      <div class="text-danger" *ngIf="Gender?.errors?.['required']">Gender is required</div>
+                    </div>
+                    <!-- Validation -->
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                  <div class="form-group">
+                    <label for="PhoneNumber">Phone Number</label>
+                    <input type="number" class="form-control" id="PhoneNumber" placeholder="9998882020"
+                      formControlName="PhoneNumber">
+                    <!-- Validation -->
+                    <div *ngIf="PhoneNumber && PhoneNumber.invalid && PhoneNumber.touched">
+                      <div class="text-danger" *ngIf="PhoneNumber?.errors?.['required']">PhoneNumber is required</div>
+                      <div class="text-danger" *ngIf="PhoneNumber?.errors?.['pattern']">Phone Number is invalid</div>
+                    </div>
+                    <!-- Validation -->
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                  <div class="form-group">
+                    <label for="DOB">Date of birth</label>
+                    <input class="form-control" type="date" id="DOB" name="date" formControlName="DOB"
+                      max="{{maxDate | date:'yyyy-MM-dd'}}">
+                    <!-- Validation -->
+                    <div *ngIf="DOB && DOB.invalid && DOB.touched">
+                      <div class="text-danger" *ngIf="DOB?.errors?.['required']">DOB is required</div>
+                    </div>
+                    <!-- Validation -->
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4 col-sm-4">
+                  <div class="form-group">
+                    <label for="State">State</label>
+                    <select class="form-control" formControlName="State" data-bs-toggle="tooltip"
+                      title="{{State?.value || 'Select the state where you live'}}">
+                      <option disabled value="">Select State</option>
+                      <option *ngFor="let state of states" [value]="state">{{state}}</option>
+                    </select>
+                    <!-- Validation -->
+                    <div *ngIf="State && State.invalid && State.touched">
+                      <div class="text-danger" *ngIf="State?.errors?.['required']">State is required</div>
+                    </div>
+                    <!-- Validation -->
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                  <div class="form-group">
+                    <label for="City">City</label>
+                    <select class="form-control" formControlName="State" data-bs-toggle="tooltip"
+                      title="{{State?.value || 'Select the state where you live'}}" formControlName="City">
+                      <option disabled value="">Select City</option>
+                      <option *ngFor="let city of cities" [value]="city">{{city}}</option>
+                    </select>
+
+
+                    <!-- Validation -->
+                    <div *ngIf="City && City.invalid && City.touched">
+                      <div class="text-danger" *ngIf="City?.errors?.['required']">City is required</div>
+                    </div>
+                    <!-- Validation -->
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                  <div class="form-group">
+                    <label for="Pincode">Pincode</label>
+                    <input class="form-control" type="text" name="name" id="Pincode" placeholder="Pincode"
+                      formControlName="Pincode">
+                    <!-- Validation -->
+                    <div *ngIf="Pincode && Pincode.invalid && Pincode.touched">
+                      <div class="text-danger" *ngIf="Pincode?.errors?.['required']">Pincode is required</div>
+                      <div class="text-danger" *ngIf="Pincode?.errors?.['pattern']">Pincode should be of 6 digit</div>
+                    </div>
+                    <!-- Validation -->
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 col-sm-12">
+                  <div class="form-group">
+                    <label for="FullAddress">Full Address</label>
+                    <textarea class="form-control" id="FullAddress" rows="3" placeholder="Enter your address"
+                      formControlName="FullAddress"></textarea>
+                    <!-- Validation -->
+                    <div *ngIf="FullAddress&& FullAddress.invalid && FullAddress.touched">
+                      <div class="text-danger" *ngIf="FullAddress?.errors?.['required']">FullAddress is required</div>
+                    </div>
+                    <!-- Validation -->
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 col-sm-12">
+                  <div class="mb-3">
+                    <label for="ProfilePic">Profile Picture</label>
+                    <input class="form-control" type="file" id="ProfilePic" formControlName="ProfilePicture"
+                      (change)="onChange($event)">
+                    <!-- Validation -->
+                    <div *ngIf="profilePicture && profilePicture.invalid && profilePicture.touched">
+                      <div class="text-danger" *ngIf="profilePicture?.errors?.['required']">Profile Picture is required
+                      </div>
+                    </div>
+                    <div class="text-danger" *ngIf="registerForm.errors?.['invalidExtension']">Only PNG / JPEG and JPG
+                      images
+                      are
+                      allowed</div>
+                    <!-- Validation -->
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <h6 class="text-center mb-3" style="color: #5170ec;"> <ins> Enter Your Login Credentials
+                  </ins> </h6>
+                <div class="col-md-6 col-sm-6">
+                  <div class="form-group">
+                    <label for="Email">Email</label>
+                    <input class="form-control" type="email" name="email" id="Email" placeholder="Email"
+                      formControlName="Email">
+                    <!-- Validation -->
+                    <div *ngIf="Email && Email.invalid && Email.touched">
+                      <div class="text-danger" *ngIf="Email?.errors?.['required']">Email is required</div>
+                      <div class="text-danger" *ngIf="Email?.errors?.['email']">Invalid Email Address</div>
+                    </div>
+                    <!-- Validation -->
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                  <div class="form-group">
+                    <label for="Password">Password</label>
+                    <input class="form-control" type="text" name="password" id="Password" placeholder="Password"
+                      formControlName="Password">
+                    <!-- Validation -->
+                    <div *ngIf="Password && Password.invalid && Password.touched">
+                      <div class="text-danger" *ngIf="Password?.errors?.['required']">Password is required</div>
+                      <div class="text-danger" *ngIf="Password?.errors?.['pattern']">Password should have atleast 1
+                        uppercase, 1
+                        lowercase, 1 digit and 1 special character and should have atleast 6 characters </div>
+                    </div>
+                    <!-- Validation -->
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 text-center">
+                <button class="box-btn signup-btn" href="#" [disabled]="registerForm.invalid">
+                  Sign Up
+                </button>
+              </div>
+              <div class="col-12 text-center">
+                <p class="al-acc">
+                  Already have an account?
+                  <a routerLink="/signin"> Sign In</a>
+                </p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
