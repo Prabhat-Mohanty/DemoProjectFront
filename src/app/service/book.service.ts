@@ -15,6 +15,7 @@ export class BookService {
   }
 
   getBooksByGenre(genres: string[]): Observable<any> {
+    debugger;
     return this.http.get(
       `${this.baseUrl}/category?genres=${genres.join('&genres=')}`
     );
@@ -69,10 +70,13 @@ export class BookService {
       Authorization: 'Bearer ' + localStorage.getItem('token'),
     }),
   };
-  getAllIssuedBooks() {
-    // this.getLoggedInUserEmail();
+  getAllIssuedBooks(status: string[]) {
+    debugger;
+    this.getLoggedInUserEmail();
     return this.http.get<any>(
-      `${this.userUrl}/listOfOrders?email=${this.email}`,
+      `${this.userUrl}/listOfOrders?email=${this.email}&status=${status.join(
+        '&status='
+      )}`,
       this.httpOptions
     );
   }

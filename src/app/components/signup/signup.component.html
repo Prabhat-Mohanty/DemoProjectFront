@@ -118,7 +118,7 @@
                 <div class="col-md-4 col-sm-4">
                   <div class="form-group">
                     <label for="City">City</label>
-                    <select class="form-control" formControlName="State" data-bs-toggle="tooltip"
+                    <select class="form-control" data-bs-toggle="tooltip"
                       title="{{State?.value || 'Select the state where you live'}}" formControlName="City">
                       <option disabled value="">Select City</option>
                       <option *ngFor="let city of cities" [value]="city">{{city}}</option>

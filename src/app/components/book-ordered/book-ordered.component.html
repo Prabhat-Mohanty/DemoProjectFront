@@ -2,31 +2,38 @@
   <div class="col-md-12 col-12 col-sm-12">
     <div class="card">
       <div>
-        <h4 class="text-center"><ins> Pending Books</ins></h4>
+        <h2 class="text-center"><ins>Your Ordered List</ins></h2>
       </div>
       <div class="card-body">
+        <form class="d-flex mb-2" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search By Book" aria-label="Search">
+        </form>
         <div class="table-responsive">
           <table class="table table-striped">
             <tbody>
               <tr>
                 <th class="text-center">#</th>
-                <th>Book Image</th>
-                <th>Book Name</th>
-                <th>Applied Date</th>
-                <th>Due Date</th>
-                <th>Status</th>
+                <th class="text-center">Book Image</th>
+                <th class="text-center">Book Name</th>
+                <th class="text-center">Applied Date</th>
+                <th class="text-center">Due Date</th>
+                <th class="text-center">Status</th>
               </tr>
-              <tr *ngFor="let issuebook of issuedbook">
-                <td class="text-center">1</td>
+              <tr
+                *ngFor="let issuebook of issuedbook | paginate: { itemsPerPage: pageSize, currentPage: currentPage }; let i = index">
+                <td class=" text-center">{{currentPage <= 1 ? i+1 : ( 1 + i + ((currentPage-1) * 10))}}</td>
                 <td><img [src]="'https://localhost:7085/img/'+issuebook.images[0]" [alt]="issuebook.bookName"
                     width="100"></td>
-                <td>{{issuebook.bookName}}</td>
-                <td>{{issuebook.appliedDate | date:'dd/MM/yyyy'}}</td>
-                <td>{{issuebook.dueDate | date:'dd/MM/yyyy'}}</td>
-                <td><span class="badge text-bg-primary">{{issuebook.status}}</span></td>
+                <td class="text-center">{{issuebook.bookName}}</td>
+                <td class="text-center">{{issuebook.appliedDate | date:'dd/MM/yyyy'}}</td>
+                <td class="text-center">{{issuebook.dueDate | date:'dd/MM/yyyy'}}</td>
+                <td class="text-center"><span
+                    [ngClass]="issuebook.status == 'Pending' ? 'badge text-bg-warning' : (issuebook.status == 'Approved' ? 'badge text-bg-info' : (issuebook.status == 'Rejected' ? 'badge text-bg-danger' : (issuebook.status == 'Due' ? 'badge text-bg-primary' : 'badge text-bg-success')))">{{issuebook.status}}</span>
+                </td>
               </tr>
             </tbody>
           </table>
+          <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
         </div>
       </div>
     </div>

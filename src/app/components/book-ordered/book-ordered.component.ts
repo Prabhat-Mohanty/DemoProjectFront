@@ -10,11 +10,17 @@ import { BookService } from 'src/app/service/book.service';
 })
 export class BookOrderedComponent implements OnInit {
   issuedbook: any;
+  status = ['pending', 'approved', 'completed', 'due', 'rejected'];
+  pageSize = 5; // number of items to display per page
+  currentPage = 1; // current page number
+
   constructor(private Book: BookService) {}
   ngOnInit(): void {
-    this.Book.getAllIssuedBooks().subscribe(
+    debugger;
+    this.Book.getAllIssuedBooks(this.status).subscribe(
       (res) => {
         this.issuedbook = res;
+        console.log(this.issuedbook);
         console.log(res);
       },
       (error) => {

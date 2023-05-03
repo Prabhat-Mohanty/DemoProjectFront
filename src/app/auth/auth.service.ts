@@ -94,4 +94,13 @@ export class AuthService {
       { headers }
     );
   }
+
+  //Update User Profile
+  updateProfile(formData: FormData) {
+    const headers = new HttpHeaders()
+      .set('accept', '*/*')
+      .set('Authorization', 'Bearer ' + this.etoken);
+    const url = `${this.baseUrl}/updateProfile`;
+    return this.http.post(url, formData, { headers });
+  }
 }

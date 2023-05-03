@@ -35,6 +35,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { UpdateProfileComponent } from './components/update-profile/update-profile.component';
+import { MatCardModule } from '@angular/material/card';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -81,6 +83,8 @@ import { UpdateProfileComponent } from './components/update-profile/update-profi
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
+    MatCardModule,
+    NgxPaginationModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
