@@ -14,10 +14,16 @@ export class BookService {
     this.decodeToken();
   }
 
-  getBooksByGenre(genres: string[]): Observable<any> {
-    debugger;
+  getBooksByGenre(genres: string[], query: string): Observable<any> {
+    if (query.length < 1) {
+      return this.http.get(
+        `${this.baseUrl}/category?genres=${genres.join('&genres=')}`
+      );
+    }
     return this.http.get(
-      `${this.baseUrl}/category?genres=${genres.join('&genres=')}`
+      `${this.baseUrl}/category?search=${query}&genres=${genres.join(
+        '&genres='
+      )}`
     );
   }
 
@@ -32,6 +38,8 @@ export class BookService {
   email: any;
   role: any;
   getLoggedInUserEmail() {
+    this.token = localStorage.getItem('token');
+    this.decodeToken();
     const arr = Object.entries(this.decode).map(([key, value]) => ({
       [key]: value,
     }));
@@ -70,9 +78,19 @@ export class BookService {
       Authorization: 'Bearer ' + localStorage.getItem('token'),
     }),
   };
-  getAllIssuedBooks(status: string[]) {
-    debugger;
+
+  getAllIssuedBooks(status: string[], search: string) {
     this.getLoggedInUserEmail();
+
+    if (search.length > 0) {
+      return this.http.get<any>(
+        `${this.userUrl}/listOfOrders?email=${
+          this.email
+        }&search=${search}&status=${status.join('&status=')}`,
+        this.httpOptions
+      );
+    }
+
     return this.http.get<any>(
       `${this.userUrl}/listOfOrders?email=${this.email}&status=${status.join(
         '&status='

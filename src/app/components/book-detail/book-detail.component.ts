@@ -13,7 +13,7 @@ export class BookDetailComponent implements OnInit {
   book: any;
   suggestedBooks: any;
   checkAval = true;
-  days = 1;
+  days = 0;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -55,13 +55,15 @@ export class BookDetailComponent implements OnInit {
   }
 
   increment() {
-    if (this.days < 20) {
-      this.days++;
-    }
+    // console.log(this.book.actualStocks);
+    if (this.book.actualStocks > 0)
+      if (this.days < 20) {
+        this.days++;
+      }
   }
 
   decrement() {
-    if (this.days > 1) {
+    if (this.days > 0) {
       this.days--;
     }
   }

@@ -5,6 +5,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/auth/auth.service';
 
+import { MatDialog } from '@angular/material/dialog';
+
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
@@ -17,7 +19,8 @@ export class SigninComponent {
     public auth: AuthService,
     private toast: ToastrService,
     private router: Router,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private dialog: MatDialog
   ) {
     this.auth.isVisible.subscribe((res) => {
       this.isVisible = res;
@@ -46,6 +49,7 @@ export class SigninComponent {
           this.toast.success('Login Successfull', 'Success');
           this.spinner.hide();
           this.auth.isLogged.next(true);
+          this.dialog.closeAll();
           this.router.navigate(['']);
         }
       },

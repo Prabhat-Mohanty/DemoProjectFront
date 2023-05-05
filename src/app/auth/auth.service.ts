@@ -2,6 +2,9 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
+import jwt_decode from 'jwt-decode';
+import { BookService } from '../service/book.service';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -9,13 +12,13 @@ export class AuthService {
   isVisible = new Subject<boolean>();
   isLogged = new BehaviorSubject<boolean>(this.isLoggedIn());
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private bookService: BookService) {}
 
   baseUrl: string = 'https://localhost:7085/api/Authentication';
 
   //For Register
   register(formData: any) {
-    let userParam: HttpParams = new HttpParams().set('role', 'User');
+    let userParam: HttpParams = new HttpParams().set('role', 'Admin');
     return this.http.post(this.baseUrl, formData, {
       params: userParam,
     });

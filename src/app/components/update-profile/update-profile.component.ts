@@ -94,7 +94,6 @@ export class UpdateProfileComponent implements OnInit {
     this.auth.getUpdateProfile(this.Book.getLoggedInUserEmail()).subscribe(
       (res: any) => {
         this.userDetails = res;
-        // console.log(res);
         this.updateuser = new FormGroup({
           FirstName: new FormControl(res['firstName']),
           LastName: new FormControl(res['lastName']),

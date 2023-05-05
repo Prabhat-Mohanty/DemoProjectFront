@@ -1,39 +1,48 @@
-<div class="container mt-5" *ngIf="issuedbook">
+<div class="container mt-5">
   <div class="col-md-12 col-12 col-sm-12">
     <div class="card">
       <div>
         <h2 class="text-center"><ins>Your Ordered List</ins></h2>
       </div>
       <div class="card-body">
-        <form class="d-flex mb-2" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search By Book" aria-label="Search">
-        </form>
-        <div class="table-responsive">
-          <table class="table table-striped">
-            <tbody>
-              <tr>
-                <th class="text-center">#</th>
-                <th class="text-center">Book Image</th>
-                <th class="text-center">Book Name</th>
-                <th class="text-center">Applied Date</th>
-                <th class="text-center">Due Date</th>
-                <th class="text-center">Status</th>
-              </tr>
-              <tr
-                *ngFor="let issuebook of issuedbook | paginate: { itemsPerPage: pageSize, currentPage: currentPage }; let i = index">
-                <td class=" text-center">{{currentPage <= 1 ? i+1 : ( 1 + i + ((currentPage-1) * 10))}}</td>
-                <td><img [src]="'https://localhost:7085/img/'+issuebook.images[0]" [alt]="issuebook.bookName"
-                    width="100"></td>
-                <td class="text-center">{{issuebook.bookName}}</td>
-                <td class="text-center">{{issuebook.appliedDate | date:'dd/MM/yyyy'}}</td>
-                <td class="text-center">{{issuebook.dueDate | date:'dd/MM/yyyy'}}</td>
-                <td class="text-center"><span
-                    [ngClass]="issuebook.status == 'Pending' ? 'badge text-bg-warning' : (issuebook.status == 'Approved' ? 'badge text-bg-info' : (issuebook.status == 'Rejected' ? 'badge text-bg-danger' : (issuebook.status == 'Due' ? 'badge text-bg-primary' : 'badge text-bg-success')))">{{issuebook.status}}</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+        <div class="col-md-6">
+          <input class="form-control me-2" type="text" placeholder="Bookname" autocomplete="off" aria-label="Search"
+            #myinput>
+        </div>
+        <hr>
+        <div class="results">
+          <div class="d-flex">
+            <h2>Search Results</h2>
+            <span class="ms-auto pt-2 text-muted">{{searchResultCount}} Results
+              Found</span>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th class="text-center">Book Image</th>
+                  <th class="text-center">Book Name</th>
+                  <th class="text-center">Applied Date</th>
+                  <th class="text-center">Due Date</th>
+                  <th class="text-center">Status</th>
+                </tr>
+                <tr
+                  *ngFor="let issuebook of issuedbook | paginate: { itemsPerPage: pageSize, currentPage: currentPage }; let i = index">
+                  <td class=" text-center">{{currentPage <= 1 ? i+1 : ( 1 + i + ((currentPage-1) * 10))}}</td>
+                  <td><img [src]="'https://localhost:7085/img/'+issuebook.images[0]" [alt]="issuebook.bookName"
+                      width="100"></td>
+                  <td class="text-center">{{issuebook.bookName}}</td>
+                  <td class="text-center">{{issuebook.appliedDate | date:'dd/MM/yyyy'}}</td>
+                  <td class="text-center">{{issuebook.dueDate | date:'dd/MM/yyyy'}}</td>
+                  <td class="text-center"><span
+                      [ngClass]="issuebook.status == 'Pending' ? 'badge text-bg-warning' : (issuebook.status == 'Approved' ? 'badge text-bg-info' : (issuebook.status == 'Rejected' ? 'badge text-bg-danger' : (issuebook.status == 'Due' ? 'badge text-bg-primary' : 'badge text-bg-success')))">{{issuebook.status}}</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+          </div>
         </div>
       </div>
     </div>

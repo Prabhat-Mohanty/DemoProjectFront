@@ -1,5 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { error } from 'jquery';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  fromEvent,
+  map,
+  switchMap,
+} from 'rxjs';
 import { BookService } from 'src/app/service/book.service';
 
 @Component({
@@ -7,16 +21,16 @@ import { BookService } from 'src/app/service/book.service';
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.css'],
 })
-export class CategoryComponent implements OnInit {
+export class CategoryComponent implements OnInit, AfterViewInit {
   books: any;
   imageSrc = '/bookImages/B1/10minutes.jpg';
   isChecked = false;
-  genre: string = '';
-  genres: string[] = [];
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private book: BookService
-  ) {}
+
+  issuedbook: any;
+
+  @ViewChild('myinput') myinput: ElementRef<HTMLInputElement> =
+    {} as ElementRef;
+
   slidesStore: any = [
     {
       genre: 'arts',
@@ -210,53 +224,50 @@ export class CategoryComponent implements OnInit {
     },
   ];
 
-  ngOnInit() {
-    this.genre = this.activatedRoute.snapshot.params['genre'];
-    for (let g = 0; g < this.slidesStore.length; g++) {
-      if (this.slidesStore[g].genre == this.genre) {
-        this.slidesStore[g].select = true;
-      }
-    }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private book: BookService
+  ) {}
 
-    this.genres = [];
-    for (let index = 0; index < this.slidesStore.length; index++) {
-      if (this.slidesStore[index].select == true) {
-        this.genres.push(this.slidesStore[index].genre);
-      }
-    }
-    this.callAPI(this.genres);
+  searchTerm: any;
+  ngAfterViewInit(): void {
+    this.searchTerm = fromEvent<any>(this.myinput.nativeElement, 'keyup');
+    const dataToSearch = fromEvent<any>(this.myinput.nativeElement, 'keyup');
+
+    dataToSearch
+      .pipe(
+        map((event: any) => event.target.value),
+        debounceTime(1000),
+        distinctUntilChanged(),
+        switchMap((data: any) => {
+          // const sendval = this.getAllGenre() + data;
+          return this.book.getBooksByGenre(this.getAllGenre(), data);
+        })
+      )
+      .subscribe(
+        (res: any) => {
+          this.books = res;
+        },
+        (error) => {
+          console.log(error.error);
+        }
+      );
   }
 
-  aOG: string[] = [];
-  allbook: string[] = [];
-
-  onlo($event: any) {
-    const id = $event.target.value;
-    const check = $event.target.checked;
-    for (let g = 0; g < this.slidesStore.length; g++) {
-      if (this.slidesStore[g].genre == id) {
-        this.slidesStore[g].select = check;
+  genre: string = '';
+  ngOnInit(): void {
+    this.genre = this.activatedRoute.snapshot.params['genre'];
+    for (let index = 0; index < this.slidesStore.length; index++) {
+      if (this.slidesStore[index].genre == this.genre) {
+        this.slidesStore[index].select = true;
       }
     }
-    this.aOG = [];
-    for (let index = 0; index < this.slidesStore.length; index++) {
-      if (this.slidesStore[index].select == true) {
-        this.aOG.push(this.slidesStore[index].genre);
-      }
-    }
-    for (let index = 0; index < this.slidesStore.length; index++) {
-      this.allbook.push(this.slidesStore[index].genre);
-    }
 
-    if (this.aOG.length < 1) {
-      this.callAPI(this.allbook);
-    } else {
-      this.callAPI(this.aOG);
-    }
+    this.callAPI(this.getAllGenre());
   }
 
   callAPI(genre: string[]) {
-    this.book.getBooksByGenre(genre).subscribe(
+    this.book.getBooksByGenre(genre, '').subscribe(
       (data) => {
         this.books = data;
       },
@@ -264,5 +275,29 @@ export class CategoryComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  listOfGenre: string[] = [];
+  getAllGenre() {
+    this.listOfGenre = [];
+    for (let index = 0; index < this.slidesStore.length; index++) {
+      if (this.slidesStore[index].select == true) {
+        this.listOfGenre.push(this.slidesStore[index].genre);
+      }
+    }
+
+    return this.listOfGenre;
+  }
+
+  onlo($event: any) {
+    const id = $event.target.value;
+    const check = $event.target.checked;
+    for (let index = 0; index < this.slidesStore.length; index++) {
+      if (this.slidesStore[index].genre == id) {
+        this.slidesStore[index].select = check;
+      }
+    }
+
+    this.callAPI(this.getAllGenre());
   }
 }

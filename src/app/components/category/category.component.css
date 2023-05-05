@@ -8,7 +8,7 @@
 .form-check-label {
   display: flex;
   position: relative;
-  padding-left: 80px;
+  padding: 0px 80px 10px;
   cursor: pointer;
   font-size: large;
 }
@@ -150,4 +150,16 @@ hr::after {
 
 .c {
   max-width: 330px;
+}
+
+.form-control {
+  width: 20%;
+  border-radius: 8px;
+  font-weight: 400;
+  border: 1px solid #051242;
+}
+
+.errorMessage {
+  color: #9f3434;
+  margin-top: 208px;
 }

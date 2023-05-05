@@ -1,6 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { error } from 'jquery';
-import { map } from 'rxjs';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { NgForm } from '@angular/forms';
+import {
+  Subscription,
+  debounceTime,
+  distinctUntilChanged,
+  fromEvent,
+  map,
+  pluck,
+  switchMap,
+} from 'rxjs';
+
 import { BookService } from 'src/app/service/book.service';
 
 @Component({
@@ -8,20 +23,45 @@ import { BookService } from 'src/app/service/book.service';
   templateUrl: './book-ordered.component.html',
   styleUrls: ['./book-ordered.component.css'],
 })
-export class BookOrderedComponent implements OnInit {
+export class BookOrderedComponent implements OnInit, AfterViewInit {
   issuedbook: any;
+
   status = ['pending', 'approved', 'completed', 'due', 'rejected'];
   pageSize = 5; // number of items to display per page
   currentPage = 1; // current page number
+  @ViewChild('myinput') myinput: ElementRef<HTMLInputElement> =
+    {} as ElementRef;
 
   constructor(private Book: BookService) {}
+  ngAfterViewInit(): void {
+    const dataToSearch = fromEvent<any>(this.myinput.nativeElement, 'keyup');
+    dataToSearch
+      .pipe(
+        map((event: any) => event.target.value),
+        debounceTime(100),
+        distinctUntilChanged(),
+        switchMap((data: any) => {
+          // const sendval = this.getAllGenre() + data;
+          return this.Book.getAllIssuedBooks(this.status, data);
+        })
+      )
+      .subscribe(
+        (res: any) => {
+          this.issuedbook = res;
+          this.searchResultCount = Object.keys(res).length;
+        },
+        (error) => {
+          console.log(error.error);
+        }
+      );
+  }
+
+  searchResultCount: number = 0;
   ngOnInit(): void {
-    debugger;
-    this.Book.getAllIssuedBooks(this.status).subscribe(
+    this.Book.getAllIssuedBooks(this.status, '').subscribe(
       (res) => {
         this.issuedbook = res;
-        console.log(this.issuedbook);
-        console.log(res);
+        this.searchResultCount = Object.keys(res).length;
       },
       (error) => {
         console.log(error);

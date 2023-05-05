@@ -54,7 +54,9 @@
                 <button type="button" (click)="increment()" class="ms-1"><i class="fa-solid fa-plus"></i></button>
               </div>
               <input type="hidden" name="BookId" [value]="book.id" [(ngModel)]="book.id">
-              <button type="submit" [routerLink]="" class="box-btn rent mx-1 mt-4 mb-5">Apply for rent</button>
+              <button type="submit" [routerLink]="" [disabled]="days == 0 ? true: false"
+                class="box-btn rent mx-1 mt-4 mb-5">Apply for
+                rent</button>
             </form>
           </div>
         </div>
