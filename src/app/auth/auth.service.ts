@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-
 import jwt_decode from 'jwt-decode';
 import { BookService } from '../service/book.service';
 
@@ -11,6 +10,7 @@ import { BookService } from '../service/book.service';
 export class AuthService {
   isVisible = new Subject<boolean>();
   isLogged = new BehaviorSubject<boolean>(this.isLoggedIn());
+  isAdmin = new BehaviorSubject<string>('');
 
   constructor(private http: HttpClient, private bookService: BookService) {}
 
@@ -27,6 +27,7 @@ export class AuthService {
   //For Login
   login(data: any) {
     const url = `${this.baseUrl}/login`;
+
     return this.http.post(url, data);
   }
 
@@ -82,12 +83,14 @@ export class AuthService {
 
   //Logout
   logout() {
+    this.isAdmin.next('');
     return localStorage.removeItem('token');
   }
 
   etoken = localStorage.getItem('token');
   //Get Profile Details
   getUpdateProfile(email: string) {
+    this.etoken = localStorage.getItem('token');
     const headers = new HttpHeaders()
       .set('accept', '*/*')
       .set('Authorization', 'Bearer ' + this.etoken);

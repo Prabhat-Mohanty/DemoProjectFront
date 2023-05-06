@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/auth/auth.service';
-
+import jwt_decode from 'jwt-decode';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -14,7 +14,6 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class SigninComponent {
   isVisible: boolean = false;
-
   constructor(
     public auth: AuthService,
     private toast: ToastrService,
@@ -39,16 +38,34 @@ export class SigninComponent {
     return this.loginForm.get('Password');
   }
 
+  token: any;
+  decode: any;
+  role: any;
+
+  checkLoggedInRole() {
+    this.token = localStorage.getItem('token');
+    if (this.token != null) {
+      this.decode = jwt_decode(this.token);
+      const arr = Object.entries(this.decode).map(([key, value]) => ({
+        [key]: value,
+      }));
+      this.role = Object.values(arr[2]).join(' ');
+      return this.role;
+    }
+  }
+
   onLogin() {
     this.spinner.show();
-    console.log(this.loginForm.value);
+    // console.log(this.loginForm.value);
     this.auth.login(this.loginForm.value).subscribe(
       (res: any) => {
         if (res.token != null) {
           localStorage.setItem('token', res.token);
+          this.checkLoggedInRole();
           this.toast.success('Login Successfull', 'Success');
           this.spinner.hide();
           this.auth.isLogged.next(true);
+          this.auth.isAdmin.next(this.checkLoggedInRole());
           this.dialog.closeAll();
           this.router.navigate(['']);
         }

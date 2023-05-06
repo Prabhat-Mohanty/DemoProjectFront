@@ -37,6 +37,10 @@ import { MatInputModule } from '@angular/material/input';
 import { UpdateProfileComponent } from './components/update-profile/update-profile.component';
 import { MatCardModule } from '@angular/material/card';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { AddbookComponent } from './components/addbook/addbook.component';
+import { AddauthorComponent } from './components/addauthor/addauthor.component';
+import { AddpublisherComponent } from './components/addpublisher/addpublisher.component';
+import { GetallbooksComponent } from './components/getallbooks/getallbooks.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +64,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
     BookOrderedComponent,
     SigninModalComponent,
     UpdateProfileComponent,
+    AddbookComponent,
+    AddauthorComponent,
+    AddpublisherComponent,
+    GetallbooksComponent,
   ],
   imports: [
     BrowserModule,

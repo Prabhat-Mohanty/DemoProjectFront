@@ -54,7 +54,10 @@
                 <a routerLink="" class="nav-link">Home</a>
               </li>
               <li class="nav-item">
-                <a routerLink="aboutus" class="nav-link">About</a>
+                <a routerLink="addbook" class="nav-link">Author</a>
+              </li>
+              <li class="nav-item">
+                <a routerLink="aboutus" class="nav-link" *ngIf="isAdmin != 'Admin'">About</a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link dropdown-toggle">Solutions</a>
@@ -119,7 +122,7 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <a routerLink="contactus" class="nav-link">Contact </a>
+                <a routerLink="contactus" class="nav-link" *ngIf="isAdmin != 'Admin'">Contact </a>
               </li>
             </ul>
           </div>
@@ -168,3 +171,5 @@
     </div>
   </div>
 </div>
+
+<div *ngIf="isAdmin">{{isAdmin}}</div>

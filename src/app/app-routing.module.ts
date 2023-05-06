@@ -18,6 +18,10 @@ import { BookOrderedComponent } from './components/book-ordered/book-ordered.com
 import { AdminComponent } from './components/home/admin/admin.component';
 import { SigninModalComponent } from './components/signin-modal/signin-modal.component';
 import { UpdateProfileComponent } from './components/update-profile/update-profile.component';
+import { AddbookComponent } from './components/addbook/addbook.component';
+import { AddauthorComponent } from './components/addauthor/addauthor.component';
+import { AddpublisherComponent } from './components/addpublisher/addpublisher.component';
+import { GetallbooksComponent } from './components/getallbooks/getallbooks.component';
 
 const routes: Routes = [
   {
@@ -70,6 +74,26 @@ const routes: Routes = [
     path: 'updateprofile',
     canActivate: [AuthGuard],
     component: UpdateProfileComponent,
+  },
+  {
+    path: 'getallbooks',
+    canActivate: [AuthGuard],
+    component: GetallbooksComponent,
+  },
+  {
+    path: 'addbook',
+    canActivate: [AuthGuard],
+    component: AddbookComponent,
+  },
+  {
+    path: 'addauthor',
+    canActivate: [AuthGuard],
+    component: AddauthorComponent,
+  },
+  {
+    path: 'addpublisher',
+    canActivate: [AuthGuard],
+    component: AddpublisherComponent,
   },
   {
     path: 'bookOrdered',

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/auth/auth.service';
 import { UserDetails } from 'src/app/model/user-details';
@@ -12,13 +12,14 @@ import { NgxSpinnerService } from 'ngx-spinner';
   templateUrl: './update-profile.component.html',
   styleUrls: ['./update-profile.component.css'],
 })
-export class UpdateProfileComponent implements OnInit {
+export class UpdateProfileComponent implements OnInit, AfterViewInit {
   constructor(
     private auth: AuthService,
     private Book: BookService,
     private toast: ToastrService,
     private spinner: NgxSpinnerService
   ) {}
+  ngOnInit(): void {}
   userDetails!: UserDetails;
   counter = 0;
 
@@ -83,7 +84,7 @@ export class UpdateProfileComponent implements OnInit {
   maxDate: string = '';
   ProfilePicture: any;
   picToShow: any;
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.maxDate =
       this.date.getFullYear() +
       '-' +

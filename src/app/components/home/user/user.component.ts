@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-user',
@@ -7,9 +8,8 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
   styleUrls: ['./user.component.css'],
 })
 export class UserComponent implements OnInit {
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
+
   slidesStore: any = [
     {
       genre: 'arts',

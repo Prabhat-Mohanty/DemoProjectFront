@@ -1,0 +1,82 @@
+<section>
+  <div class="row">
+    <div class="col-md-6">Hello</div>
+    <div class="col-md-6">
+      <div class="container mt-5" style="margin-left: -47px;">
+        <div class="col-md-12 col-12 col-sm-12">
+          <div class="card">
+            <div>
+              <h2 class="text-center"><ins> List of Book</ins></h2>
+            </div>
+            <div class="card-body">
+              <div class="col-md-12 d-flex flex-row mb-3">
+                <input class="form-control me-2 p-2" type="text" placeholder="Bookname" autocomplete="off"
+                  aria-label="Search" #myinput>
+
+                <button class="ms-auto" routerLink="">
+                  <h3>Add New</h3>
+                  <i class="fa-sharp fa-solid fa-circle-plus fa-2xl"></i>
+                </button>
+              </div>
+              <hr>
+              <div class="results">
+                <div class="d-flex">
+                  <h2>Search Results</h2>
+                  <span class="ms-auto pt-2 text-muted"> Results
+                    Found</span>
+                </div>
+                <div class="table-responsive">
+                  <table class="table table-striped">
+                    <tbody>
+                      <tr>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Book Image</th>
+                        <th class="text-center">Book Name</th>
+                        <th class="text-center">Genre</th>
+                        <th class="text-center">Publisher Name</th>
+                        <th class="text-center">Publish Date</th>
+                        <th class="text-center">Language</th>
+                        <th class="text-center">Edition</th>
+                        <th class="text-center">Book Price(₹)</th>
+                        <th class="text-center">No. of Pages</th>
+                        <th class="text-center">Description</th>
+                        <th class="text-center">Actual-Stocks</th>
+                        <th class="text-center">Ratings</th>
+                        <th class="text-center">Author Names</th>
+                        <th class="text-center">Actions</th>
+                      </tr>
+                      <tr
+                        *ngFor="let issuebook of books | paginate: { itemsPerPage: pageSize, currentPage: currentPage }; let i = index">
+                        <td class=" text-center">{{currentPage <= 1 ? i+1 : ( 1 + i + ((currentPage-1) * 10))}}</td>
+                        <td><img [src]="'https://localhost:7085/img/'+issuebook.images[0]" [alt]="issuebook.bookName"
+                            width="100"></td>
+                        <td class="text-center">{{issuebook.bookName}}</td>
+                        <td class="text-center">{{issuebook.genre}}</td>
+                        <td class="text-center">{{issuebook.publisherId}}</td>
+                        <td class="text-center">{{issuebook.publishDate | date:'dd/MM/yyyy'}}</td>
+                        <td class="text-center">{{issuebook.language}}</td>
+                        <td class="text-center">{{issuebook.edition}}</td>
+                        <td class="text-center">{{issuebook.bookCost}}</td>
+                        <td class="text-center">{{issuebook.numberOfPages}}</td>
+                        <td class="text-center">{{issuebook.description}}</td>
+                        <td class="text-center">{{issuebook.actualStocks}}</td>
+                        <td class="text-center">{{issuebook.ratings}}</td>
+                        <td class="text-center">{{ issuebook.authorIds.join(' | ') }}</td>
+                        <td class="text-center" style="padding: 30px 0px 6px 0px;">
+                          <button><i class="fa-solid fa-pen-to-square fa-xl" style="color: #005eff;"></i></button>
+                          <button><i class="fa-sharp fa-solid fa-trash fa-xl" style="color: #c11a1a;"></i></button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

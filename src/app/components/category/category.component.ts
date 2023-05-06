@@ -298,6 +298,14 @@ export class CategoryComponent implements OnInit, AfterViewInit {
       }
     }
 
-    this.callAPI(this.getAllGenre());
+    const allBooks = [];
+    if (this.getAllGenre().length == 0) {
+      for (let index = 0; index < this.slidesStore.length; index++) {
+        allBooks.push(this.slidesStore[index].genre);
+      }
+      this.callAPI(allBooks);
+    } else {
+      this.callAPI(this.getAllGenre());
+    }
   }
 }
