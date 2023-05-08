@@ -20,8 +20,8 @@ export class UserPasswordResetComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  oldpassword: string | null | undefined = '';
-  newpassword: string | null | undefined = '';
+  oldpassword: string = '';
+  newpassword: string = '';
   token: string | null | undefined = '';
   ngOnInit() {
     this.token = localStorage.getItem('token');
@@ -38,11 +38,13 @@ export class UserPasswordResetComponent implements OnInit {
   });
 
   get oldPassword() {
-    this.oldpassword = this.passwordresetform.value.oldPassword;
+    if (this.passwordresetform.value.oldPassword != null)
+      this.oldpassword = this.passwordresetform.value.oldPassword;
     return this.passwordresetform.get('oldPassword');
   }
   get newPassword() {
-    this.newpassword = this.passwordresetform.value.newPassword;
+    if (this.passwordresetform.value.newPassword != null)
+      this.newpassword = this.passwordresetform.value.newPassword;
     return this.passwordresetform.get('newPassword');
   }
 

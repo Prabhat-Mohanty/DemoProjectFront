@@ -54,43 +54,16 @@
                 <a routerLink="" class="nav-link">Home</a>
               </li>
               <li class="nav-item">
-                <a routerLink="addbook" class="nav-link">Author</a>
+                <a routerLink="addauthor" class="nav-link">Author</a>
+              </li>
+              <li class="nav-item">
+                <a routerLink="addbook" class="nav-link">Book</a>
+              </li>
+              <li class="nav-item">
+                <a routerLink="addpublisher" class="nav-link">Publisher</a>
               </li>
               <li class="nav-item">
                 <a routerLink="aboutus" class="nav-link" *ngIf="isAdmin != 'Admin'">About</a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link dropdown-toggle">Solutions</a>
-                <ul class="dropdown-menu">
-                  <li class="nav-item">
-                    <a href="solutions.html" class="nav-link">Solutions</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="solutions-details.html" class="nav-link">Solutions Details</a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link dropdown-toggle">Case Studies</a>
-                <ul class="dropdown-menu">
-                  <li class="nav-item">
-                    <a href="case.html" class="nav-link">Case Studies</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="case-details.html" class="nav-link">Case Studies Details</a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link dropdown-toggle">Blog</a>
-                <ul class="dropdown-menu">
-                  <li class="nav-item">
-                    <a href="blog.html" class="nav-link">Blog</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="blog-details.html" class="nav-link">Blog Details</a>
-                  </li>
-                </ul>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link dropdown-toggle">Pages</a>
@@ -150,7 +123,7 @@
               </li>
             </ul>
           </div>
-          <p *ngIf="isLogged == true">Hello Buddy</p>
+          <p *ngIf="isLogged == true">{{isAdmin}}</p>
           <div class="nav-btn" *ngIf="!isLogged">
             <ul class="navbar-nav text-right">
               <li class="nav-item">
@@ -171,5 +144,3 @@
     </div>
   </div>
 </div>
-
-<div *ngIf="isAdmin">{{isAdmin}}</div>

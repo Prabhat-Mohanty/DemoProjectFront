@@ -232,3 +232,7 @@ td {
 .heading {
   padding-top: 44px;
 }
+
+.signup-area .signup-form .signup-btn {
+  padding: 15px 15px;
+}

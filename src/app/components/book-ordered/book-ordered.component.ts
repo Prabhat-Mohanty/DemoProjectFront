@@ -27,7 +27,7 @@ export class BookOrderedComponent implements OnInit, AfterViewInit {
   issuedbook: any;
 
   status = ['pending', 'approved', 'completed', 'due', 'rejected', 'delivered'];
-  pageSize = 5; // number of items to display per page
+  pageSize = 10; // number of items to display per page
   currentPage = 1; // current page number
   @ViewChild('myinput') myinput: ElementRef<HTMLInputElement> =
     {} as ElementRef;

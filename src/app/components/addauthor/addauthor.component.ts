@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { map } from 'rxjs';
-import { Author } from 'src/app/interface/author';
 import { AdminService } from 'src/app/service/admin.service';
 
 @Component({
@@ -18,8 +16,9 @@ export class AddauthorComponent implements OnInit {
   ngOnInit(): void {
     this.getAllAuthor();
   }
-  pageSize = 5; // number of items to display per page
-  currentPage = 1; // current page number
+  pageSize = 10;
+  currentPage = 1;
+  searchResultCount: number = 0;
   authors: any;
   authorForm = new FormGroup({
     authorName: new FormControl(''),
@@ -30,6 +29,7 @@ export class AddauthorComponent implements OnInit {
     this.adminService.getAllAuthors().subscribe(
       (res) => {
         this.authors = res;
+        this.searchResultCount = Object.keys(res).length;
       },
       (error) => {
         this.toast.error(error.error);
@@ -39,7 +39,6 @@ export class AddauthorComponent implements OnInit {
 
   authorId: number = 0;
   edit(id: number) {
-    console.log(id);
     this.authorId = id;
     this.adminService.editAuthor(id).subscribe(
       (res: any) => {
@@ -60,7 +59,7 @@ export class AddauthorComponent implements OnInit {
           (res) => {
             this.authors = [];
             this.authors = res;
-            this.toast.success('Author added successfully');
+            this.toast.success('Author updated successfully');
           },
           (error) => {
             this.toast.error(error.error);

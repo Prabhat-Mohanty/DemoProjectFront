@@ -25,7 +25,7 @@
                     </div>
                   </div>
                   <div class="col-12 text-center">
-                    <button class="box-btn signup-btn" [disabled]="authorForm.invalid">
+                    <button class="box-btn signup-btn me-3" [disabled]="authorForm.invalid">
                       Add Author
                     </button>
                     <button type="button" (click)="updateAuthor()" class="box-btn signup-btn"
@@ -48,15 +48,15 @@
               <h2 class="text-center heading"><ins> List of Authors </ins></h2>
             </div>
             <div class="card-body">
-              <div class="col-md-12 d-flex flex-row mb-3">
+              <!-- <div class="col-md-12 d-flex flex-row mb-3">
                 <input class="form-control search me-2 p-2" type="text" placeholder="Author Name" autocomplete="off"
                   aria-label="Search" #myinput>
-              </div>
+              </div> -->
               <hr>
               <div class="results">
                 <div class="d-flex">
-                  <h2>Search Results</h2>
-                  <span class="ms-auto pt-2 text-muted"> Results
+                  <!-- <h2>Search Results</h2> -->
+                  <span class="ms-auto pt-2 text-muted">{{searchResultCount}} Results
                     Found</span>
                 </div>
                 <div class="table-responsive">
@@ -65,7 +65,7 @@
                       <tr>
                         <th class="text-center">#</th>
                         <th class="text-center">Author Name</th>
-                        <th class="text-center">Action</th>
+                        <th class="text-center">Actions</th>
                       </tr>
                       <tr
                         *ngFor="let author of authors | paginate: { itemsPerPage: pageSize, currentPage: currentPage }; let i = index">

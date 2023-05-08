@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddpublisherComponent } from './addpublisher.component';
+import AddpublisherComponent from './addpublisher.component';
 
 describe('AddpublisherComponent', () => {
   let component: AddpublisherComponent;
@@ -8,9 +8,8 @@ describe('AddpublisherComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddpublisherComponent ]
-    })
-    .compileComponents();
+      declarations: [AddpublisherComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AddpublisherComponent);
     component = fixture.componentInstance;
