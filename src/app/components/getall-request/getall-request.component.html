@@ -1,0 +1,81 @@
+<div class="container mt-5">
+  <div class="col-md-12 col-12 col-sm-12">
+    <div class="card">
+      <div>
+        <h2 class="text-center"><ins>Ordered List</ins></h2>
+      </div>
+      <div class="card-body">
+        <div class="d-flex">
+          <input class="form-control" type="text" placeholder="Bookname" autocomplete="off" aria-label="Search"
+            #myinput>
+          <select class="form-select ms-auto pt-2" (change)="updateStatusArray($event)">
+            <option value="">All</option>
+            <option value="Pending">Pending</option>
+            <option value="Approved">Approved</option>
+            <option value="Delivered">Delivered</option>
+            <option value="Completed">Completed</option>
+          </select>
+        </div>
+        <hr>
+        <div class="results">
+          <div class="d-flex">
+            <h2>Search Results</h2>
+            <span class="ms-auto pt-2 text-muted"> Results
+              Found</span>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th class="text-center">User Email</th>
+                  <th class="text-center">Applied Date</th>
+                  <th class="text-center">Due Date</th>
+                  <th class="text-center">Book Name</th>
+                  <th class="text-center">Status</th>
+                  <th class="text-center">Actions</th>
+                </tr>
+                <tr *ngFor="let pendingRequest of pendingRequests let i = index">
+                  <td class=" text-center">{{i+1}}</td>
+                  <td class="text-center">{{pendingRequest.userEmail}}</td>
+                  <td class="text-center">{{pendingRequest.issued_Date | date:'dd/MM/yyyy'}}</td>
+                  <td class="text-center">{{ pendingRequest.status != 'Pending' && pendingRequest.status != 'Approved' ?
+                    (pendingRequest.due_Date |
+                    date:'dd/MM/yyyy') : '-'}}</td>
+                  <td class="text-center">{{pendingRequest.bookId}}</td>
+                  <td class="text-center"><span
+                      [ngClass]="pendingRequest.status == 'Pending' ? 'badge text-bg-warning' : (pendingRequest.status == 'Approved' ? 'badge text-bg-info' : (pendingRequest.status == 'Rejected' ? 'badge text-bg-danger' : (pendingRequest.status == 'Due' ? 'badge text-bg-primary' : (pendingRequest.status == 'Delivered' ? 'badge text-bg-secondary' : 'badge text-bg-success'))))">{{pendingRequest.status}}</span>
+                  </td>
+                  <td class="text-center" *ngIf="pendingRequest.status == 'Pending'">
+                    <button class="btn btn-sm me-2 btn-info"
+                      (click)="changeStatus('Approved',pendingRequest.id,pendingRequest.days)">Approve</button>
+                    <button class="btn btn-sm btn-danger"
+                      (click)="changeStatus('Rejected',pendingRequest.id,pendingRequest.days)">Reject</button>
+                  </td>
+                  <td class="text-center" *ngIf="pendingRequest.status == 'Approved'">
+                    <button class="btn btn-sm btn-secondary"
+                      (click)="changeStatus('Delivered',pendingRequest.id,pendingRequest.days)">Delivered</button>
+                  </td>
+                  <td class="text-center"
+                    *ngIf="pendingRequest.status == 'Delivered' || pendingRequest.status == 'Due'">
+                    <button class="btn btn-sm btn-success"
+                      (click)="changeStatus('Completed',pendingRequest.id,pendingRequest.days)">Completed</button>
+                  </td>
+                  <td class="text-center" *ngIf="pendingRequest.status == 'Completed'">
+                    <!-- <i class="fa-regular fa-circle-xmark fa-lg" style="color: #b80a0a;"></i> -->
+                    -No Action-
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- ----Pagination---- -->
+            <button (click)="decrement()" class="btn btn-primary" [disabled]="filterObj.pageNumber == 1">Prev</button>
+            <span>{{filterObj.pageNumber}}</span>
+            <button (click)="increment()" class="btn btn-primary">Next</button>
+            <!-- ----Pagination---- -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

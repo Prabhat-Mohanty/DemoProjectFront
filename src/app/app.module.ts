@@ -41,6 +41,7 @@ import { AddbookComponent } from './components/addbook/addbook.component';
 import { AddauthorComponent } from './components/addauthor/addauthor.component';
 import { AddpublisherComponent } from './components/addpublisher/addpublisher.component';
 import { GetallbooksComponent } from './components/getallbooks/getallbooks.component';
+import { GetallRequestComponent } from './components/getall-request/getall-request.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { GetallbooksComponent } from './components/getallbooks/getallbooks.compo
     AddauthorComponent,
     AddpublisherComponent,
     GetallbooksComponent,
+    GetallRequestComponent,
   ],
   imports: [
     BrowserModule,

@@ -162,3 +162,10 @@ button.ms-1 {
   font-size: 18px;
   background-color: white;
 }
+
+.carousel-control-next-icon {
+  background-color: #000000;
+}
+.carousel-control-prev-icon {
+  background-color: #000000;
+}

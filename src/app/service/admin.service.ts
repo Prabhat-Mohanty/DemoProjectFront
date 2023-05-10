@@ -16,6 +16,32 @@ export class AdminService {
       headers,
     });
   }
+  getAllBooksWithFilters(filter: {
+    bookname: string;
+    pageNumber: number;
+    pageSize: number;
+  }) {
+    const headers = new HttpHeaders().set('accept', '*/*');
+    const bookname = filter.bookname;
+    const pageNumber = filter.pageNumber;
+    const pageSize = filter.pageSize;
+    return this.http.get(
+      `${this.baseurl}/getAllBooksWithAuthorIdWithFilters?bookname=${bookname}&pageNumber=${pageNumber}&pageSize=${pageSize}`,
+      {
+        headers,
+      }
+    );
+  }
+
+  addBook(formData: any) {
+    debugger;
+    return this.http.post(`${this.baseurl}/addbook`, formData);
+  }
+
+  editBook(id: number) {
+    const headers = new HttpHeaders().set('accept', '*/*');
+    return this.http.get(`${this.baseurl}/GetBookByIds/${id}`, { headers });
+  }
 
   // --------------------Author--------------------
   // Get all authors
@@ -108,5 +134,64 @@ export class AdminService {
   deletePublisher(id: number) {
     const headers = new HttpHeaders().set('accept', '*/*');
     return this.http.delete(`${this.baseurl}/deletePublisher/${id}`);
+  }
+
+  // --------------------Issued Book Actions--------------------
+
+  getAllRequest(status: string[], pageNumber: number, pageSize: number) {
+    const headers = new HttpHeaders().set('accept', '*/*');
+    return this.http.get(
+      // `${this.baseurl}/getpendingrequest?status=${status.join(' ')}`,
+      `${this.baseurl}/getpendingrequest?status=${status.join(
+        '&status='
+      )}&pageNumber=${pageNumber}&pageSize=${pageSize}`,
+      { headers }
+    );
+  }
+
+  changeStatus(value: string, reqid: number, days: number) {
+    const headers = {
+      'Content-Type': 'application/json-patch+json',
+      Accept: '*/*',
+    };
+    if (value == 'Delivered') {
+      const now = Date.now();
+      const date = new Date(now);
+      const issuedDate = new Date(now);
+      date.setDate(date.getDate() + days + 1);
+      const futureTimestamp = date.getTime();
+      const futureDate = new Date(futureTimestamp);
+      const futureDateString = futureDate.toISOString();
+      const body = [
+        {
+          op: 'replace',
+          path: 'status',
+          value: value,
+        },
+        {
+          op: 'replace',
+          path: 'due_Date',
+          value: futureDateString,
+        },
+        {
+          op: 'replace',
+          path: 'issued_Date',
+          value: issuedDate,
+        },
+      ];
+      return this.http.patch(`${this.baseurl}/status?reqid=${reqid}`, body, {
+        headers,
+      });
+    }
+    const body = [
+      {
+        op: 'replace',
+        path: 'status',
+        value: value,
+      },
+    ];
+    return this.http.patch(`${this.baseurl}/status?reqid=${reqid}`, body, {
+      headers,
+    });
   }
 }

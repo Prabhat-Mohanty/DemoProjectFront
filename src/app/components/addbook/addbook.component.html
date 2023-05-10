@@ -1,5 +1,5 @@
 <section class="signup-area">
-  <div class="row my-5">
+  <div class="row my-4">
     <div class="col-md-5 px-4">
       <div class="container">
         <div class="row">
@@ -7,23 +7,128 @@
             <div class="signup-form">
               <div class="section-tittle text-center" style="color: #5170ec;">
                 <u>
-                  <h2 style="color: #5170ec;">Add New Publisher</h2>
+                  <h2 style="color: #5170ec;">Add New Book</h2>
                 </u>
               </div>
               <form [formGroup]="bookForm" (ngSubmit)="addBook()">
                 <div class="row">
-                  <div class="col-md-12 col-sm-12">
-                    <div class="form-group">
-                      <input class="form-control" type="text" name="PublisherName" placeholder="PublisherName"
-                        formControlName="publisherName" autocomplete="PublisherName">
+                  <div class="row">
+                    <div class="col-md-4 col-sm-4">
+                      <div class="form-group">
+                        <label for="BookName">Book Name</label>
+                        <input class="form-control" type="text" name="BookName" id="BookName" placeholder="Book Name"
+                          formControlName="BookName">
+                      </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                      <div class="form-group">
+                        <label for="Genre">Genre</label>
+                        <select class="form-control" formControlName="Genre">
+                          <option disabled value="">Genre</option>
+                          <option *ngFor="let genre of genres" [value]="genre">
+                            {{genre}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                      <div class="form-group">
+                        <label for="PublisherId">Publisher Name</label>
+                        <select class="form-control" formControlName="PublisherId">
+                          <option disabled value="">Publisher</option>
+                          <option *ngFor="let publisher of publisherList" [value]="publisher.id">
+                            {{publisher.publisherName}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4 col-sm-4">
+                      <div class="form-group">
+                        <label for="PublishDate">Publish Date</label>
+                        <input class="form-control" type="date" id="PublishDate" name="date"
+                          formControlName="PublishDate">
+                      </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                      <div class="form-group">
+                        <label for="Language">Language</label>
+                        <input type="text" class="form-control" id="Language" placeholder="English"
+                          formControlName="Language">
+                      </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                      <div class="form-group">
+                        <label for="Edition">Edition</label>
+                        <input class="form-control" type="text" id="Edition" name="Edition" placeholder="1"
+                          formControlName="Edition">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4 col-sm-4">
+                      <div class="form-group">
+                        <label for="BookCost">Book Cost</label>
+                        <input class="form-control" type="number" id="BookCost" name="BookCost" placeholder="150"
+                          formControlName="BookCost">
+                      </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                      <div class="form-group">
+                        <label for="NumberOfPages">Number Of Pages</label>
+                        <input class="form-control" type="number" id="NumberOfPages" name="NumberOfPages"
+                          placeholder="200" formControlName="NumberOfPages">
+                      </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                      <div class="form-group">
+                        <label for="ActualStocks">Actual Stocks</label>
+                        <input class="form-control" type="number" name="ActualStocks" id="ActualStocks" placeholder="10"
+                          formControlName="ActualStocks">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4 col-sm-4">
+                      <div class="form-group">
+                        <label for="Ratings">Ratings</label>
+                        <input class="form-control" type="number" id="Ratings" name="Ratings" placeholder="1 - 5"
+                          formControlName="Ratings">
+                      </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                      <div class="form-group">
+                        <label for="NumberOfPages">Authors</label>
+                        <select class="form-select" formControlName="AuthorIds" multiple cols="5">
+                          <option disabled value="">Author Name</option>
+                          <option *ngFor="let author of authorList" [value]="author.id">
+                            {{author.authorName}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                      <div class="form-group">
+                        <label for="Description">Description</label>
+                        <textarea class="form-control" id="Description" rows="3" placeholder="Description"
+                          formControlName="Description"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                      <div class="mb-3">
+                        <label for="Images">Profile Picture</label>
+                        <input class="form-control" type="file" id="Images" (change)="onChange($event)"
+                          formControlName="Images" accept="image/png, image/jpeg" multiple>
+                      </div>
                     </div>
                   </div>
                   <div class="col-12 text-center">
-                    <button class="box-btn signup-btn me-3" [disabled]="bookForm.invalid">
-                      Add Book
+                    <button class="box-btn signup-btn mx-5" [disabled]="bookForm.invalid">
+                      Add New Book
                     </button>
-                    <button type="button" (click)="updateBook()" class="box-btn signup-btn"
-                      [disabled]="bookForm.invalid">
+                    <button class="box-btn signup-btn mx-5" [disabled]="bookForm.invalid">
                       Update Book
                     </button>
                   </div>
@@ -35,22 +140,22 @@
       </div>
     </div>
     <div class="col-md-7 px-4">
-      <div class="container" style="margin-left: -47px;">
+      <div class="container" style="margin-left: -5px;">
         <div class="col-md-12 col-12 col-sm-12">
           <div class="card">
             <div>
               <h2 class="text-center heading"><ins> List of Books </ins></h2>
             </div>
             <div class="card-body">
-              <!-- <div class="col-md-12 d-flex flex-row mb-3">
-                <input class="form-control search me-2 p-2" type="text" placeholder="Publisher Name" autocomplete="off"
-                  aria-label="Search" #myinput>
-              </div> -->
+              <div class="col-md-12 d-flex flex-row mb-3">
+                <input class="form-control search me-2 p-2" type="text" placeholder="BookName" autocomplete="off"
+                  (keyup)="onClick()" [(ngModel)]="filterObj.bookname">
+              </div>
               <hr>
               <div class="results">
                 <div class="d-flex">
-                  <!-- <h2>Search Results</h2> -->
-                  <span class="ms-auto pt-2 text-muted"> Results
+                  <h2>Search Results</h2>
+                  <span class="ms-auto pt-2 text-muted">{{searchResultCount}} Results
                     Found</span>
                 </div>
                 <div class="table-responsive">
@@ -58,13 +163,38 @@
                     <tbody>
                       <tr>
                         <th class="text-center">#</th>
-                        <th class="text-center">Publisher Name</th>
+                        <th class="text-center">Book-image</th>
+                        <th class="text-center">Book-name</th>
+                        <th class="text-center">Genre</th>
+                        <th class="text-center">Publisher-name</th>
+                        <th class="text-center">Publish-date</th>
+                        <th class="text-center">Language</th>
+                        <th class="text-center">Edition</th>
+                        <th class="text-center">Description</th>
+                        <th class="text-center">Book-cost</th>
+                        <th class="text-center">No. of pages</th>
+                        <th class="text-center">Actual-stock</th>
+                        <th class="text-center">Ratings</th>
+                        <th class="text-center">Author-name(s)</th>
                         <th class="text-center">Actions</th>
                       </tr>
-                      <tr
-                        *ngFor="let book of books | paginate: { itemsPerPage: pageSize, currentPage: currentPage }; let i = index">
-                        <td class="text-center">{{i+1}}</td>
-                        <td class="text-center">{{book.publisherName}}</td>
+                      <tr *ngFor="let book of books let i = index">
+                        <td class="text-center">{{filterObj.pageNumber <= 1 ? i+1 : ( 1 + i + ((filterObj.pageNumber-1)
+                            * filterObj.pageSize))}}</td>
+                        <td class="text-center"> <img [src]="'https://localhost:7085/img/'+book.images[0]"
+                            [alt]="book.bookName"></td>
+                        <td class="text-center">{{book.bookName}}</td>
+                        <td class="text-center">{{book.genre}}</td>
+                        <td class="text-center">{{book.publisherId}}</td>
+                        <td class="text-center">{{book.publishDate}}</td>
+                        <td class="text-center">{{book.language}}</td>
+                        <td class="text-center">{{book.edition}}</td>
+                        <td class="text-center">{{book.description}}</td>
+                        <td class="text-center">{{book.bookCost}}</td>
+                        <td class="text-center">{{book.numberOfPages}}</td>
+                        <td class="text-center">{{book.actualStocks}}</td>
+                        <td class="text-center">{{book.ratings}}</td>
+                        <td class="text-center">{{book.authorIds.join(' | ')}}</td>
                         <td class="text-center" style="padding-top: 5px;">
                           <button (click)="edit(book.id)"><i class="fa-solid fa-pen-to-square fa-xl"
                               style="color: #005eff;"></i></button>
@@ -74,7 +204,13 @@
                       </tr>
                     </tbody>
                   </table>
-                  <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+                  <!-- ----Pagination---- -->
+                  <button (click)="decrement()" class="btn btn-primary"
+                    [disabled]="filterObj.pageNumber == 1">Prev</button>
+                  <span>{{filterObj.pageNumber}}</span>
+                  <button (click)="increment()" class="btn btn-primary"
+                    [disabled]="searchResultCount < (filterObj.pageNumber * filterObj.pageSize )">Next</button>
+                  <!-- ----Pagination---- -->
                 </div>
               </div>
             </div>
