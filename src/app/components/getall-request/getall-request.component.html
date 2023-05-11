@@ -35,8 +35,9 @@
                   <th class="text-center">Status</th>
                   <th class="text-center">Actions</th>
                 </tr>
-                <tr *ngFor="let pendingRequest of pendingRequests let i = index">
-                  <td class=" text-center">{{i+1}}</td>
+                <tr *ngFor="let pendingRequest of pendingRequests?.requests let i = index">
+                  <td class="text-center">{{filterObj.pageNumber <= 1 ? i+1 : ( 1 + i + ((filterObj.pageNumber-1) *
+                      filterObj.pageSize))}}</td>
                   <td class="text-center">{{pendingRequest.userEmail}}</td>
                   <td class="text-center">{{pendingRequest.issued_Date | date:'dd/MM/yyyy'}}</td>
                   <td class="text-center">{{ pendingRequest.status != 'Pending' && pendingRequest.status != 'Approved' ?
@@ -69,9 +70,11 @@
               </tbody>
             </table>
             <!-- ----Pagination---- -->
-            <button (click)="decrement()" class="btn btn-primary" [disabled]="filterObj.pageNumber == 1">Prev</button>
+            <button (click)="decrement()" class="btn btn-sm btn-primary me-1"
+              [disabled]="filterObj.pageNumber == 1">Prev</button>
             <span>{{filterObj.pageNumber}}</span>
-            <button (click)="increment()" class="btn btn-primary">Next</button>
+            <button (click)="increment()" class="btn btn-sm btn-primary ms-1"
+              [disabled]="pendingRequests?.totalCount <= (filterObj.pageNumber * filterObj.pageSize)">Next</button>
             <!-- ----Pagination---- -->
           </div>
         </div>

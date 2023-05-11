@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import jwt_decode from 'jwt-decode';
 import { BookService } from '../service/book.service';
@@ -10,7 +10,9 @@ import { BookService } from '../service/book.service';
 export class AuthService {
   isVisible = new Subject<boolean>();
   isLogged = new BehaviorSubject<boolean>(this.isLoggedIn());
-  isAdmin = new BehaviorSubject<string>('');
+  isAdmin = new BehaviorSubject<any>(this.isAdminLoggedIn());
+
+  // isLoggedInUsername = new BehaviorSubject<any>(this.getUsername());
 
   constructor(private http: HttpClient, private bookService: BookService) {}
 
@@ -75,6 +77,13 @@ export class AuthService {
   isLoggedIn(): boolean {
     return localStorage.getItem('token') !== null;
   }
+  //Check the user is logged in or not
+  isAdminLoggedIn() {
+    if (localStorage.getItem('role') !== null) {
+      return localStorage.getItem('role');
+    }
+    return '';
+  }
 
   //Get Token
   getoken(): string | null {
@@ -84,6 +93,7 @@ export class AuthService {
   //Logout
   logout() {
     this.isAdmin.next('');
+    // localStorage.removeItem('role');
     return localStorage.removeItem('token');
   }
 

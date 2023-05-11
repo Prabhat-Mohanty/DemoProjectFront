@@ -23,6 +23,8 @@ import { AddauthorComponent } from './components/addauthor/addauthor.component';
 import { AddpublisherComponent } from './components/addpublisher/addpublisher.component';
 import { GetallbooksComponent } from './components/getallbooks/getallbooks.component';
 import { GetallRequestComponent } from './components/getall-request/getall-request.component';
+import { PricingComponent } from './components/pricing/pricing.component';
+import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
 
 const routes: Routes = [
   {
@@ -54,8 +56,16 @@ const routes: Routes = [
     component: AboutusComponent,
   },
   {
+    path: 'pricing',
+    component: PricingComponent,
+  },
+  {
+    path: 'termsandconditions',
+    component: TermsAndConditionsComponent,
+  },
+  {
     path: 'gallery',
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     component: GalleryComponent,
   },
   {

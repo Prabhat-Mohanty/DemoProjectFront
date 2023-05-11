@@ -1,12 +1,11 @@
 import {
   AfterViewInit,
   Component,
-  ElementRef,
+  ElementRef, 
   OnInit,
   ViewChild,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { error } from 'jquery';
 import {
   debounceTime,
   distinctUntilChanged,
@@ -241,7 +240,11 @@ export class CategoryComponent implements OnInit, AfterViewInit {
         distinctUntilChanged(),
         switchMap((data: any) => {
           // const sendval = this.getAllGenre() + data;
-          return this.book.getBooksByGenre(this.getAllGenre(), data);
+          return this.book.getBooksByGenre(
+            this.getAllGenre(),
+            data,
+            this.filterObj
+          );
         })
       )
       .subscribe(
@@ -265,9 +268,56 @@ export class CategoryComponent implements OnInit, AfterViewInit {
 
     this.callAPI(this.getAllGenre());
   }
+  filterObj = {
+    bookname: '',
+    pageNumber: 1,
+    pageSize: 12,
+  };
+
+  decrement() {
+    const genre = [];
+    this.filterObj.pageNumber--;
+    for (let index = 0; index < this.slidesStore.length; index++) {
+      if (this.slidesStore[index].select == true) {
+        genre.push(this.slidesStore[index].genre);
+      }
+    }
+    if (genre.length < 1) {
+      const genres = [];
+      for (let index = 0; index < this.slidesStore.length; index++) {
+        if (this.slidesStore[index].select == false) {
+          genres.push(this.slidesStore[index].genre);
+        }
+      }
+      this.callAPI(genres);
+    }
+
+    this.callAPI(genre);
+  }
+  increment() {
+    const genre = [];
+    this.filterObj.pageNumber++;
+    for (let index = 0; index < this.slidesStore.length; index++) {
+      if (this.slidesStore[index].select == true) {
+        genre.push(this.slidesStore[index].genre);
+      }
+    }
+
+    if (genre.length < 1) {
+      const genres = [];
+      for (let index = 0; index < this.slidesStore.length; index++) {
+        if (this.slidesStore[index].select == false) {
+          genres.push(this.slidesStore[index].genre);
+        }
+      }
+      this.callAPI(genres);
+    }
+
+    this.callAPI(genre);
+  }
 
   callAPI(genre: string[]) {
-    this.book.getBooksByGenre(genre, '').subscribe(
+    this.book.getBooksByGenre(genre, '', this.filterObj).subscribe(
       (data) => {
         this.books = data;
       },

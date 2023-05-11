@@ -14,10 +14,16 @@ export class BookService {
     this.decodeToken();
   }
 
-  getBooksByGenre(genres: string[], query: string): Observable<any> {
+  getBooksByGenre(
+    genres: string[],
+    query: string,
+    filterObj: any
+  ): Observable<any> {
     if (query.length < 1) {
       return this.http.get(
-        `${this.baseUrl}/category?genres=${genres.join('&genres=')}`
+        `${this.baseUrl}/category?genres=${genres.join(
+          '&genres='
+        )}&pageNumber=${filterObj.pageNumber}&pageSize=${filterObj.pageSize}`
       );
     }
     return this.http.get(

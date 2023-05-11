@@ -42,6 +42,9 @@ import { AddauthorComponent } from './components/addauthor/addauthor.component';
 import { AddpublisherComponent } from './components/addpublisher/addpublisher.component';
 import { GetallbooksComponent } from './components/getallbooks/getallbooks.component';
 import { GetallRequestComponent } from './components/getall-request/getall-request.component';
+import { PricingComponent } from './components/pricing/pricing.component';
+import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +73,9 @@ import { GetallRequestComponent } from './components/getall-request/getall-reque
     AddpublisherComponent,
     GetallbooksComponent,
     GetallRequestComponent,
+    PricingComponent,
+    TermsAndConditionsComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,

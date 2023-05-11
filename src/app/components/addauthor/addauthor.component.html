@@ -23,6 +23,11 @@
                       <input class="form-control" type="text" name="AuthorName" placeholder="AuthorName"
                         formControlName="authorName" autocomplete="AuthorName">
                     </div>
+                    <!-- Validation -->
+                    <div *ngIf="authorName && authorName.invalid && authorName.touched">
+                      <div class="text-danger" *ngIf="authorName?.errors?.['required']">Author Name is required</div>
+                    </div>
+                    <!-- Validation -->
                   </div>
                   <div class="col-12 text-center">
                     <button class="box-btn signup-btn me-3" [disabled]="authorForm.invalid">

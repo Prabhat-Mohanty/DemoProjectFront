@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
-
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 @Component({
   selector: 'app-addpublisher',
   templateUrl: './addpublisher.component.html',
@@ -11,7 +12,8 @@ import { AdminService } from 'src/app/service/admin.service';
 export class AddpublisherComponent implements OnInit {
   constructor(
     private adminService: AdminService,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private dialog: MatDialog
   ) {}
   ngOnInit(): void {
     this.getAllPublisher();
@@ -36,8 +38,12 @@ export class AddpublisherComponent implements OnInit {
   publishers: any;
 
   publisherForm = new FormGroup({
-    publisherName: new FormControl(''),
+    publisherName: new FormControl('', [Validators.required]),
   });
+
+  get publisherName() {
+    return this.publisherForm.get('publisherName');
+  }
 
   addPublisher() {
     this.adminService.addPublisher(this.publisherForm.value).subscribe(
@@ -86,16 +92,27 @@ export class AddpublisherComponent implements OnInit {
   }
 
   delete(id: number) {
-    this.adminService.deletePublisher(id).subscribe(
-      (res) => {
-        this.publishers = [];
-        this.publishers = res;
-        this.toast.success('Author deleted successfully');
-        this.getAllPublisher();
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Confirm Delete',
+        message: 'Are you sure you want to delete this author?',
       },
-      (error) => {
-        this.toast.error(error.error);
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.adminService.deletePublisher(id).subscribe(
+          (res) => {
+            this.publishers = [];
+            this.publishers = res;
+            this.toast.success('Author deleted successfully');
+            this.getAllPublisher();
+          },
+          (error) => {
+            this.toast.error(error.error);
+          }
+        );
       }
-    );
+    });
   }
 }

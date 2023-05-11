@@ -181,7 +181,7 @@
                       <tr *ngFor="let book of books let i = index">
                         <td class="text-center">{{filterObj.pageNumber <= 1 ? i+1 : ( 1 + i + ((filterObj.pageNumber-1)
                             * filterObj.pageSize))}}</td>
-                        <td class="text-center"> <img [src]="'https://localhost:7085/img/'+book.images[0]"
+                        <td class="text-center"> <img class="img" [src]="'https://localhost:7085/img/'+book.images[0]"
                             [alt]="book.bookName"></td>
                         <td class="text-center">{{book.bookName}}</td>
                         <td class="text-center">{{book.genre}}</td>
@@ -195,11 +195,12 @@
                         <td class="text-center">{{book.actualStocks}}</td>
                         <td class="text-center">{{book.ratings}}</td>
                         <td class="text-center">{{book.authorIds.join(' | ')}}</td>
-                        <td class="text-center" style="padding-top: 5px;">
-                          <button (click)="edit(book.id)"><i class="fa-solid fa-pen-to-square fa-xl"
-                              style="color: #005eff;"></i></button>
-                          <button (click)="delete(book.id)"><i class="fa-sharp fa-solid fa-trash fa-xl"
-                              style="color: #c11a1a;"></i></button>
+                        <td class="text-center d-flex">
+                          <button (click)="edit(book.id)" style="background-color: transparent; padding: 10px;"><i
+                              class="fa-solid fa-pen-to-square fa-xl"
+                              style="color: #005eff; margin: 35px 0;"></i></button>
+                          <button (click)="delete(book.id)" style="background-color: transparent;"><i
+                              class="fa-sharp fa-solid fa-trash fa-xl" style="color: #c11a1a;"></i></button>
                         </td>
                       </tr>
                     </tbody>
@@ -209,7 +210,7 @@
                     [disabled]="filterObj.pageNumber == 1">Prev</button>
                   <span>{{filterObj.pageNumber}}</span>
                   <button (click)="increment()" class="btn btn-primary"
-                    [disabled]="searchResultCount < (filterObj.pageNumber * filterObj.pageSize )">Next</button>
+                    [disabled]="searchResultCount <= (filterObj.pageNumber * filterObj.pageSize)">Next</button>
                   <!-- ----Pagination---- -->
                 </div>
               </div>

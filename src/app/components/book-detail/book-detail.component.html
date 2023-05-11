@@ -13,7 +13,7 @@
         <div class="carousel-inner">
           <div class="carousel-item" *ngFor="let bookImage of book.images; let i=index"
             [ngClass]="{ 'active': i === 0 }">
-            <img [src]="'https://localhost:7085/img/'+bookImage" [alt]="book.bookName" class="d-block w-100 image-view">
+            <img [src]="'https://localhost:7085/img/'+bookImage" [alt]="book.bookName" class="d-block image-view">
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
@@ -40,6 +40,66 @@
           <div *ngIf="book.description.length < 0">
             <strong>No Discription Avaliable</strong>
           </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="BookDiscription mt-3">
+                Publisher Name
+              </div>
+              <div *ngIf="book.description.length > 0" class="ps-2 discription">
+                {{book.publisherId}}
+              </div>
+
+              <div class="BookDiscription mt-3">
+                Genre
+              </div>
+              <div *ngIf="book.description.length > 0" class="ps-2 discription">
+                {{book.genre}}
+              </div>
+
+              <div class="BookDiscription mt-3">
+                Edition
+              </div>
+              <div *ngIf="book.description.length > 0" class="ps-2 discription">
+                {{book.edition}}
+              </div>
+
+              <div class="BookDiscription mt-3">
+                Cost
+              </div>
+              <div *ngIf="book.description.length > 0" class="ps-2 discription">
+                {{book.bookCost}}
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="BookDiscription mt-3">
+                Publish Date
+              </div>
+              <div *ngIf="book.description.length > 0" class="ps-2 discription">
+                {{book.publishDate | date:'dd/MM/yyyy'}}
+              </div>
+
+              <div class="BookDiscription mt-3">
+                Language
+              </div>
+              <div *ngIf="book.description.length > 0" class="ps-2 discription">
+                {{book.language}}
+              </div>
+
+              <div class="BookDiscription mt-3">
+                Number Of Pages
+              </div>
+              <div *ngIf="book.description.length > 0" class="ps-2 discription">
+                {{book.numberOfPages}}
+              </div>
+
+              <div class="BookDiscription mt-3">
+                Ratings
+              </div>
+              <div *ngIf="book.description.length > 0" class="ps-2 discription">
+                {{book.ratings}}
+              </div>
+            </div>
+          </div>
           <div class="mt-3">
             <button [routerLink]="" class="box-btn review mx-1 mt-4 mb-5">Review</button>
             <button [ngClass]="checkAval ? 'box-btn check mx-1 mt-4 mb-5' : 'pragraph'"
@@ -62,5 +122,27 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- Related Books By Genre -->
+<section class="home-service-area pb-70 container s">
+  <div class="container">
+    <div class="section-title" style="margin-left: 17%;">
+      <h2> <u> Similar Books </u></h2>
+      <p> Lib.com Provide All Kind of Books </p>
+    </div>
+  </div>
+  <div class="mt-2">
+    <owl-carousel-o [options]="customOptions">
+      <ng-container *ngFor="let book of relatedBooks">
+        <ng-template carouselSlide [id]="book.genre">
+          <a [routerLink]="'/bookdetails/'+book.id" class="a-img"><img class="h"
+              [src]="'https://localhost:7085/img/'+ book.images[0]" [alt]="book.alt" (click)="changeDetails(book.id)">
+            <!-- <div class="px-5">{{book.bookName}}</div> -->
+          </a>
+        </ng-template>
+      </ng-container>
+    </owl-carousel-o>
   </div>
 </section>

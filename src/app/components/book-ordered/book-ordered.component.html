@@ -25,6 +25,7 @@
                   <th class="text-center">Book Name</th>
                   <th class="text-center">Applied Date</th>
                   <th class="text-center">Due Date</th>
+                  <th class="text-center">Days Left</th>
                   <th class="text-center">Status</th>
                 </tr>
                 <tr
@@ -37,8 +38,13 @@
                   <td class="text-center">{{ issuebook.status != 'Pending' && issuebook.status != 'Approved' ?
                     (issuebook.dueDate |
                     date:'dd/MM/yyyy') : '-'}}</td>
+                  <td class="text-center"><span [ngClass]="issuebook.status != 'Delivered' ? '' : (issuebook.daysLeft > 0 ?
+ '' : 'badge text-bg-primary' )">{{ issuebook.status != 'Delivered' ? '-' :
+                      (issuebook.daysLeft > 0 ?
+                      issuebook.daysLeft + ' days' : 'Due' ) }}</span></td>
                   <td class="text-center"><span
-                      [ngClass]="issuebook.status == 'Pending' ? 'badge text-bg-warning' : (issuebook.status == 'Approved' ? 'badge text-bg-info' : (issuebook.status == 'Rejected' ? 'badge text-bg-danger' : (issuebook.status == 'Due' ? 'badge text-bg-primary' : (issuebook.status == 'Delivered' ? 'badge text-bg-secondary' : 'badge text-bg-success'))))">{{issuebook.status}}</span>
+                      [ngClass]="issuebook.status == 'Pending' ? 'badge text-bg-warning' : (issuebook.status == 'Approved' ? 'badge text-bg-info' : (issuebook.status == 'Rejected' ? 'badge text-bg-danger' : (issuebook.status == 'Due' ? 'badge text-bg-primary' : (issuebook.status == 'Delivered' ? 'badge text-bg-secondary' : 'badge text-bg-success'))))">{{issuebook.status
+                      == 'Delivered' ? 'Return' :issuebook.status }}</span>
                   </td>
                 </tr>
               </tbody>

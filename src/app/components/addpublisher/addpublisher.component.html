@@ -17,6 +17,12 @@
                       <input class="form-control" type="text" name="PublisherName" placeholder="PublisherName"
                         formControlName="publisherName" autocomplete="PublisherName">
                     </div>
+                    <!-- Validation -->
+                    <div *ngIf="publisherName && publisherName.invalid && publisherName.touched">
+                      <div class="text-danger" *ngIf="publisherName?.errors?.['required']">Publisher Name is required
+                      </div>
+                    </div>
+                    <!-- Validation -->
                   </div>
                   <div class="col-12 text-center">
                     <button class="box-btn signup-btn me-3" [disabled]="publisherForm.invalid">

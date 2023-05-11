@@ -74,6 +74,7 @@ export class GetallRequestComponent implements OnInit {
       .subscribe(
         (res) => {
           this.pendingRequests = res;
+          // console.log(Object.keys(res).length);
         },
         (error) => {
           this.toast.error(error.error);

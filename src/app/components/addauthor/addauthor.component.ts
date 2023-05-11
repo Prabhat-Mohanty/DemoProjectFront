@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-addauthor',
@@ -11,7 +13,8 @@ import { AdminService } from 'src/app/service/admin.service';
 export class AddauthorComponent implements OnInit {
   constructor(
     private adminService: AdminService,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private dialog: MatDialog
   ) {}
   ngOnInit(): void {
     this.getAllAuthor();
@@ -21,8 +24,12 @@ export class AddauthorComponent implements OnInit {
   searchResultCount: number = 0;
   authors: any;
   authorForm = new FormGroup({
-    authorName: new FormControl(''),
+    authorName: new FormControl('', [Validators.required]),
   });
+
+  get authorName() {
+    return this.authorForm.get('authorName');
+  }
 
   getAllAuthor() {
     // debugger;
@@ -69,17 +76,28 @@ export class AddauthorComponent implements OnInit {
   }
 
   delete(id: number) {
-    this.adminService.deleteAuthor(id).subscribe(
-      (res) => {
-        this.authors = [];
-        this.authors = res;
-        this.toast.success('Author deleted successfully');
-        this.getAllAuthor();
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Confirm Delete',
+        message: 'Are you sure you want to delete this publisher?',
       },
-      (error) => {
-        this.toast.error(error.error);
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.adminService.deleteAuthor(id).subscribe(
+          (res) => {
+            this.authors = [];
+            this.authors = res;
+            this.toast.success('Author deleted successfully');
+            this.getAllAuthor();
+          },
+          (error) => {
+            this.toast.error(error.error);
+          }
+        );
       }
-    );
+    });
   }
   addAuthor() {
     this.adminService.addAuthor(this.authorForm.value).subscribe(

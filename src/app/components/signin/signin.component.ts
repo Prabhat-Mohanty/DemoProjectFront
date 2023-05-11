@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/auth/auth.service';
 import jwt_decode from 'jwt-decode';
 import { MatDialog } from '@angular/material/dialog';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-signin',
@@ -25,7 +26,6 @@ export class SigninComponent {
       this.isVisible = res;
     });
   }
-
   loginForm = new FormGroup({
     Email: new FormControl('', [Validators.required, Validators.email]),
     Password: new FormControl('', Validators.required),
@@ -41,6 +41,7 @@ export class SigninComponent {
   token: any;
   decode: any;
   role: any;
+  email: any;
 
   checkLoggedInRole() {
     this.token = localStorage.getItem('token');
@@ -66,6 +67,8 @@ export class SigninComponent {
           this.spinner.hide();
           this.auth.isLogged.next(true);
           this.auth.isAdmin.next(this.checkLoggedInRole());
+          localStorage.removeItem('role');
+          localStorage.setItem('role', this.checkLoggedInRole());
           this.dialog.closeAll();
           this.router.navigate(['']);
         }

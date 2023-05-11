@@ -53,41 +53,36 @@
               <li class="nav-item">
                 <a routerLink="" class="nav-link">Home</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" *ngIf="isLogged == true && isAdmin == 'Admin'">
                 <a routerLink="addauthor" class="nav-link">Author</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" *ngIf="isLogged == true && isAdmin == 'Admin'">
                 <a routerLink="addbook" class="nav-link">Book</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" *ngIf="isLogged == true && isAdmin == 'Admin'">
                 <a routerLink="addpublisher" class="nav-link">Publisher</a>
               </li>
-              <li class="nav-item">
-                <a routerLink="aboutus" class="nav-link" *ngIf="isAdmin != 'Admin'">About</a>
+              <li class="nav-item" *ngIf="isAdmin != 'Admin'">
+                <a routerLink="aboutus" class="nav-link">About</a>
+              </li>
+              <li *ngIf="isLogged == true && isAdmin != 'Admin'" class="nav-item">
+                <a routerLink="category/arts" class="nav-link">Category</a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link dropdown-toggle">Pages</a>
+                <a href="#" class="nav-link dropdown-toggle">Services</a>
                 <ul class="dropdown-menu">
-                  <li class="nav-item">
-                    <a href="team.html" class="nav-link">Team</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="pricing.html" class="nav-link">Pricing</a>
+
+                  <li class="nav-item" *ngIf="isLogged == true && isAdmin == 'Admin'">
+                    <a routerLink="getAllRequest" class="nav-link">Requests</a>
                   </li>
                   <li class="nav-item">
                     <a routerLink="gallery" class="nav-link">Gallery</a>
                   </li>
-                  <li class="nav-item">
-                    <a href="testimonials.html" class="nav-link">Testimonials</a>
+                  <li class="nav-item" *ngIf="isLogged == true && isAdmin != 'Admin'">
+                    <a routerLink="bookOrdered" class="nav-link">Orders</a>
                   </li>
                   <li class="nav-item">
-                    <a routerLink="category/arts" class="nav-link">Category</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="faq.html" class="nav-link">FAQ</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="terms-condition.html" class="nav-link">Terms & Conditions</a>
+                    <a routerLink="termsandconditions" class="nav-link">Terms & Conditions</a>
                   </li>
                   <li class="nav-item">
                     <a routerLink="privacy" class="nav-link">Privacy Policy</a>
@@ -123,7 +118,7 @@
               </li>
             </ul>
           </div>
-          <p *ngIf="isLogged == true">{{isAdmin}}</p>
+          <!-- <p *ngIf="isLogged == true">{{isLoggedInUsername}}</p> -->
           <div class="nav-btn" *ngIf="!isLogged">
             <ul class="navbar-nav text-right">
               <li class="nav-item">
