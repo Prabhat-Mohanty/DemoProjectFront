@@ -50,6 +50,13 @@ export class AdminService {
     });
   }
 
+  deleteBook(id: number) {
+    const headers = new HttpHeaders().set('accept', '*/*');
+    return this.http.delete(`${this.baseurl}/deleteBook/${id}`, {
+      headers,
+    });
+  }
+
   // --------------------Author--------------------
   // Get all authors
   getAllAuthors() {

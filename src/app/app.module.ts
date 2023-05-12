@@ -88,7 +88,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     ToastrModule.forRoot({
       closeButton: true,
       disableTimeOut: false,
-      timeOut: 6000,
+      timeOut: 4500,
       progressBar: true,
       positionClass: 'toast-top-right',
     }), // ToastrModule added

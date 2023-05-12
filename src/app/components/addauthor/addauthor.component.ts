@@ -79,7 +79,7 @@ export class AddauthorComponent implements OnInit {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: 'Confirm Delete',
-        message: 'Are you sure you want to delete this publisher?',
+        message: 'Are you sure you want to delete this book?',
       },
     });
 

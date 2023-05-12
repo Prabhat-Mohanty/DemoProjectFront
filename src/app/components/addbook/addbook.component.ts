@@ -4,6 +4,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
 import { environment } from 'src/environments/environment';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-addbook',
@@ -17,7 +19,8 @@ export class AddbookComponent implements OnInit {
   constructor(
     private adminService: AdminService,
     private toast: ToastrService,
-    private http: HttpClient
+    private http: HttpClient,
+    private dialog: MatDialog
   ) {}
   authorList: any;
   publisherList: any;
@@ -256,5 +259,25 @@ export class AddbookComponent implements OnInit {
       }
     );
   }
-  delete(id: number) {}
+  delete(id: number) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Confirm Delete',
+        message: 'Are you sure you want to delete this book?',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.adminService.deleteBook(id).subscribe(
+          (res) => {
+            this.toast.success('Book has been deleted.');
+          },
+          (error) => {
+            this.toast.error(error.error);
+          }
+        );
+      }
+    });
+  }
 }
