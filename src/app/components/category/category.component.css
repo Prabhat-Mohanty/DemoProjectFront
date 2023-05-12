@@ -153,10 +153,11 @@ hr::after {
 }
 
 .form-control {
-  width: 20%;
-  border-radius: 8px;
-  font-weight: 400;
+  width: 30%;
+  border-radius: 6px;
+  font-weight: 500;
   border: 1px solid #051242;
+  margin-left: 80px;
 }
 
 .errorMessage {

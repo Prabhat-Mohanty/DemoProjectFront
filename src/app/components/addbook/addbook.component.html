@@ -120,7 +120,7 @@
                       <div class="mb-3">
                         <label for="Images">Profile Picture</label>
                         <input class="form-control" type="file" id="Images" (change)="onChange($event)"
-                          formControlName="Images" accept="image/png, image/jpeg" multiple>
+                          accept="image/png, image/jpeg" multiple>
                       </div>
                     </div>
                   </div>
@@ -128,7 +128,8 @@
                     <button class="box-btn signup-btn mx-5" [disabled]="bookForm.invalid">
                       Add New Book
                     </button>
-                    <button class="box-btn signup-btn mx-5" [disabled]="bookForm.invalid">
+                    <button type="button" (click)="updateBook()" class="box-btn signup-btn mx-5"
+                      [disabled]="bookForm.invalid">
                       Update Book
                     </button>
                   </div>
@@ -170,7 +171,6 @@
                         <th class="text-center">Publish-date</th>
                         <th class="text-center">Language</th>
                         <th class="text-center">Edition</th>
-                        <th class="text-center">Description</th>
                         <th class="text-center">Book-cost</th>
                         <th class="text-center">No. of pages</th>
                         <th class="text-center">Actual-stock</th>
@@ -189,7 +189,6 @@
                         <td class="text-center">{{book.publishDate}}</td>
                         <td class="text-center">{{book.language}}</td>
                         <td class="text-center">{{book.edition}}</td>
-                        <td class="text-center">{{book.description}}</td>
                         <td class="text-center">{{book.bookCost}}</td>
                         <td class="text-center">{{book.numberOfPages}}</td>
                         <td class="text-center">{{book.actualStocks}}</td>

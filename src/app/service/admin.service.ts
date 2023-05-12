@@ -34,13 +34,19 @@ export class AdminService {
   }
 
   addBook(formData: any) {
-    debugger;
     return this.http.post(`${this.baseurl}/addbook`, formData);
   }
 
   editBook(id: number) {
     const headers = new HttpHeaders().set('accept', '*/*');
     return this.http.get(`${this.baseurl}/GetBookByIds/${id}`, { headers });
+  }
+
+  updateBook(id: number, formData: any) {
+    const headers = new HttpHeaders().set('accept', '*/*');
+    return this.http.put(`${this.baseurl}/updatebook/${id}`, formData, {
+      headers,
+    });
   }
 
   // --------------------Author--------------------

@@ -22,13 +22,14 @@
       </div>
       <div class="text-right">
         <!-- ----Pagination---- -->
-        <button (click)="decrement()" class="btn btn-primary" [disabled]="filterObj.pageNumber == 1">Prev</button>
+        <button (click)="decrement()" class="btn btn-sm btn-primary me-1"
+          [disabled]="filterObj.pageNumber == 1">Prev</button>
         <span>{{filterObj.pageNumber}}</span>
-        <button (click)="increment()" class="btn btn-primary">Next</button>
+        <button (click)="increment()" class="btn btn-sm btn-primary ms-1">Next</button>
         <!-- ----Pagination---- -->
       </div>
       <div class="container mt-5 ms-3">
-        <div class="row ms-1">
+        <div class="row row-cols-4">
           <div class="col-lg-2 col-md-2 col-sm-2 my-4 mx-5 p-2" *ngFor="let book of books">
             <a [routerLink]="'/bookdetails/'+book.id">
               <div class="card border-light">

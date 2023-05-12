@@ -118,9 +118,9 @@ export class UpdateProfileComponent implements OnInit, AfterViewInit {
     );
   }
   updateUser() {
+    debugger;
     const postData: any = this.updateuser.value;
     const formData = new FormData();
-    console.log('Picsss', this.ProfilePicture);
     formData.append('FirstName', postData.FirstName);
     formData.append('MiddleName', postData.MiddleName);
     formData.append('LastName', postData.LastName);
@@ -177,14 +177,3 @@ export class UpdateProfileComponent implements OnInit, AfterViewInit {
     }
   }
 }
-
-// this.auth.getUpdateProfile(this.Book.getLoggedInUserEmail()).subscribe(
-//   (res: any) => {
-//     // console.log(res);
-//     this.userDetails = res;
-//     console.log(this.userDetails);
-//   },
-//   (error: any) => {
-//     console.log(error);
-//   }
-// );

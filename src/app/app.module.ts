@@ -45,7 +45,6 @@ import { GetallRequestComponent } from './components/getall-request/getall-reque
 import { PricingComponent } from './components/pricing/pricing.component';
 import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
-
 @NgModule({
   declarations: [
     AppComponent,

@@ -11,6 +11,7 @@
 .d-block {
   border-radius: 0 10% 0 10%;
   height: 20rem;
+  border: 3px solid black;
 }
 .BookName {
   /* Font & Text */
@@ -24,8 +25,8 @@
   vertical-align: baseline;
   white-space: normal;
   color: #15286c;
-  margin-bottom: 3%;
-  margin-top: 60%;
+  margin-bottom: 25%;
+  margin-top: 45%;
   /* text-shadow: 3px 3px 20px #15286c, -2px 1px 30px #15286c; */
   text-shadow: 0 0 8px rgb(134, 135, 138);
 }

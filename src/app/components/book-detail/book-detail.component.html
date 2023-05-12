@@ -6,7 +6,8 @@
 <section *ngIf="book">
   <div class="row">
     <div class="col-md-5 text-center">
-      <div id="carouselExampleControls" class="carousel slide image-position" data-bs-ride="carousel">
+      <div id="carouselExampleControls" class="carousel slide image-position" data-bs-ride="carousel"
+        data-bs-interval="2000">
         <div class="BookName">
           {{ book.bookName }}
         </div>
@@ -27,6 +28,7 @@
           <span class="visually-hidden">Next</span>
         </button>
       </div>
+
     </div>
     <div class="col-md-7">
       <div class="details">
@@ -101,13 +103,14 @@
             </div>
           </div>
           <div class="mt-3">
-            <button [routerLink]="" class="box-btn review mx-1 mt-4 mb-5">Review</button>
             <button [ngClass]="checkAval ? 'box-btn check mx-1 mt-4 mb-5' : 'pragraph'"
               (click)="checkStock()">{{checkAval ? 'Tap to check availability' : 'Current stock is ' +
               book.actualStocks}}</button>
+            <!-- <button [routerLink]="" class="box-btn review mx-1 mt-4 mb-5">Review</button> -->
+
 
             <form #rentdetail="ngForm" (ngSubmit)="onSubmit(rentdetail.value)">
-              <label for="days">For how many days do you want this book?</label>
+              <label for="days" class="fw-bolder">For how many days do you want this book?</label>
               <div>
                 <button type="button" (click)="decrement()" class="ms-1"><i class="fa-solid fa-minus"></i></button>
                 <input type="text" class="form-control" id="days" name="days" [value]="days" disabled />

@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { distinctUntilChanged } from 'rxjs';
 import { AdminService } from 'src/app/service/admin.service';
 
 @Component({
@@ -121,6 +120,7 @@ export class AddbookComponent implements OnInit {
   selectedFiles: File[] = [];
   onChange(event: any) {
     this.selectedFiles = event.target.files;
+    console.log(this.selectedFiles);
   }
 
   addBook() {
@@ -147,7 +147,7 @@ export class AddbookComponent implements OnInit {
       }
     }
 
-    console.log(postData.AuthorIds);
+    // console.log(postData.AuthorIds);
     // console.log(postData); // see
     // console.log(formData); // send
 
@@ -193,25 +193,9 @@ export class AddbookComponent implements OnInit {
   bookId: number = 0;
   edit(id: number) {
     this.bookId = id;
+
     this.adminService.editBook(id).subscribe(
       (res: any) => {
-        // this.bookForm.setValue({ bookName: res.bookName });
-        // this.bookForm.setValue({
-        //   BookName: res.bookName,
-        //   Genre: res.genre,
-        //   NumberOfPages: res.numberOfPages,
-        //   ActualStocks: res.actualStocks,
-        //   AuthorIds: res.authorIds,
-        //   Ratings: res.ratings,
-        //   BookCost: res.bookCost,
-        //   PublisherId: res.publisherId,
-        //   Language: res.language,
-        //   Description: res.description,
-        //   PublishDate: res.publishDate,
-        //   Edition: res.edition,
-        //   Images: res.images,
-        // });
-
         this.bookForm = new FormGroup({
           BookName: new FormControl(res['bookName']),
           Genre: new FormControl(res['genre']),
@@ -223,13 +207,46 @@ export class AddbookComponent implements OnInit {
           PublisherId: new FormControl(res['publisherId']),
           Language: new FormControl(res['language']),
           Description: new FormControl(res['description']),
-          PublishDate: new FormControl(res['publishDate']),
+          PublishDate: new FormControl(res['publishDate'].split('T')[0]),
           Edition: new FormControl(res['edition']),
-          Images: new FormControl(
-            'https://localhost:7085/img/' + res['images']
-          ),
+          Images: new FormControl(res['images']),
         });
 
+        console.log(this.bookForm.value);
+      },
+      (error) => {
+        this.toast.error(error.error);
+      }
+    );
+  }
+  updateBook() {
+    const postData: any = this.bookForm.value;
+    const formData = new FormData();
+    formData.append('BookName', postData.BookName);
+    formData.append('Genre', postData.Genre);
+    formData.append('NumberOfPages', postData.NumberOfPages);
+    formData.append('ActualStocks', postData.ActualStocks);
+    formData.append('Ratings', postData.Ratings);
+    formData.append('BookCost', postData.BookCost);
+    formData.append('PublisherId', postData.PublisherId);
+    formData.append('Language', postData.Language);
+    formData.append('Description', postData.Description);
+    formData.append('PublishDate', postData.PublishDate);
+    formData.append('Edition', postData.Edition);
+    for (let i = 0; i < this.selectedFiles.length; i++) {
+      formData.append('Images', this.selectedFiles[i]);
+    }
+
+    if (this.bookForm.value.AuthorIds != null) {
+      for (let i = 0; i < this.bookForm.value.AuthorIds.length; i++) {
+        formData.append('AuthorIds', this.bookForm.value.AuthorIds[i]);
+      }
+    }
+
+    this.adminService.updateBook(this.bookId, formData).subscribe(
+      (res) => {
+        this.toast.success('Book Updated Successfully');
+        this.onClick();
         console.log(res);
       },
       (error) => {
@@ -237,6 +254,5 @@ export class AddbookComponent implements OnInit {
       }
     );
   }
-  updateBook() {}
   delete(id: number) {}
 }
