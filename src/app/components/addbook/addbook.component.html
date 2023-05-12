@@ -181,8 +181,8 @@
                       <tr *ngFor="let book of books let i = index">
                         <td class="text-center">{{filterObj.pageNumber <= 1 ? i+1 : ( 1 + i + ((filterObj.pageNumber-1)
                             * filterObj.pageSize))}}</td>
-                        <td class="text-center"> <img class="img" [src]="'https://localhost:7085/img/'+book.images[0]"
-                            [alt]="book.bookName"></td>
+                        <td class="text-center"> <img class="img" [src]="imgurl+book.images[0]" [alt]="book.bookName">
+                        </td>
                         <td class="text-center">{{book.bookName}}</td>
                         <td class="text-center">{{book.genre}}</td>
                         <td class="text-center">{{book.publisherId}}</td>

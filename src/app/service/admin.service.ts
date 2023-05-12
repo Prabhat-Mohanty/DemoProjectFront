@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -7,7 +8,7 @@ import { Injectable } from '@angular/core';
 export class AdminService {
   constructor(private http: HttpClient) {}
 
-  baseurl = 'https://localhost:7085/api/AdminBook';
+  baseurl = environment.adminController;
 
   // Get all books
   getAllBooks() {
@@ -77,7 +78,7 @@ export class AdminService {
 
   //Update Author
   updateAuthor(id: number, name: string) {
-    const apiUrl = `https://localhost:7085/api/AdminBook/updateAuthor/${id}`;
+    const apiUrl = `${this.baseurl}/updateAuthor/${id}`;
     const body = `"${name}"`;
     const headers = {
       'Content-Type': 'application/json-patch+json',
@@ -126,7 +127,7 @@ export class AdminService {
 
   //Update Publisher
   updatePublisher(id: number, name: string) {
-    const apiUrl = `https://localhost:7085/api/AdminBook/updatePublisher/${id}`;
+    const apiUrl = `${this.baseurl}/updatePublisher/${id}`;
     const body = `"${name}"`;
     const headers = {
       'Content-Type': 'application/json-patch+json',

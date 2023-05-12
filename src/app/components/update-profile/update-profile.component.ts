@@ -6,6 +6,7 @@ import { BookService } from 'src/app/service/book.service';
 
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-update-profile',
@@ -13,6 +14,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./update-profile.component.css'],
 })
 export class UpdateProfileComponent implements OnInit, AfterViewInit {
+  imgurl: string = environment.imgUrl;
   constructor(
     private auth: AuthService,
     private Book: BookService,
@@ -107,9 +109,7 @@ export class UpdateProfileComponent implements OnInit, AfterViewInit {
           City: new FormControl(res['city']),
           Pincode: new FormControl(res['pincode']),
           FullAddress: new FormControl(res['fullAddress']),
-          ProfilePicture: new FormControl(
-            'https://localhost:7085/img/' + res['profilePicture']
-          ),
+          ProfilePicture: new FormControl(this.imgurl + res['profilePicture']),
         });
       },
       (error: any) => {

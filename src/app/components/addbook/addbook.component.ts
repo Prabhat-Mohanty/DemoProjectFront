@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-addbook',
@@ -12,6 +13,7 @@ import { AdminService } from 'src/app/service/admin.service';
 export class AddbookComponent implements OnInit {
   books: any;
   searchResultCount: number = 0;
+  imgurl: string = environment.imgUrl;
   constructor(
     private adminService: AdminService,
     private toast: ToastrService,

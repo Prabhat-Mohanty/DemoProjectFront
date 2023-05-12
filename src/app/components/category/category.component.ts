@@ -1,7 +1,7 @@
 import {
   AfterViewInit,
   Component,
-  ElementRef, 
+  ElementRef,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -14,6 +14,7 @@ import {
   switchMap,
 } from 'rxjs';
 import { BookService } from 'src/app/service/book.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-category',
@@ -21,6 +22,8 @@ import { BookService } from 'src/app/service/book.service';
   styleUrls: ['./category.component.css'],
 })
 export class CategoryComponent implements OnInit, AfterViewInit {
+  imgurl: string = environment.imgUrl;
+
   books: any;
   imageSrc = '/bookImages/B1/10minutes.jpg';
   isChecked = false;

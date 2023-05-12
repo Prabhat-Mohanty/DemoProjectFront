@@ -14,7 +14,7 @@
         <div class="carousel-inner">
           <div class="carousel-item" *ngFor="let bookImage of book.images; let i=index"
             [ngClass]="{ 'active': i === 0 }">
-            <img [src]="'https://localhost:7085/img/'+bookImage" [alt]="book.bookName" class="d-block image-view">
+            <img [src]="imgurl+bookImage" [alt]="book.bookName" class="d-block image-view">
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
@@ -140,8 +140,8 @@
     <owl-carousel-o [options]="customOptions">
       <ng-container *ngFor="let book of relatedBooks">
         <ng-template carouselSlide [id]="book.genre">
-          <a [routerLink]="'/bookdetails/'+book.id" class="a-img"><img class="h"
-              [src]="'https://localhost:7085/img/'+ book.images[0]" [alt]="book.alt" (click)="changeDetails(book.id)">
+          <a [routerLink]="'/bookdetails/'+book.id" class="a-img"><img class="h" [src]="imgurl + book.images[0]"
+              [alt]="book.alt" (click)="changeDetails(book.id)">
             <!-- <div class="px-5">{{book.bookName}}</div> -->
           </a>
         </ng-template>

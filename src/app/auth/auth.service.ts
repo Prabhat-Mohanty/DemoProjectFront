@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import jwt_decode from 'jwt-decode';
 import { BookService } from '../service/book.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ export class AuthService {
 
   constructor(private http: HttpClient, private bookService: BookService) {}
 
-  baseUrl: string = 'https://localhost:7085/api/Authentication';
+  baseUrl: string = environment.authenticateController;
 
   //For Register
   register(formData: any) {
@@ -29,7 +30,6 @@ export class AuthService {
   //For Login
   login(data: any) {
     const url = `${this.baseUrl}/login`;
-
     return this.http.post(url, data);
   }
 
@@ -105,10 +105,9 @@ export class AuthService {
       .set('accept', '*/*')
       .set('Authorization', 'Bearer ' + this.etoken);
 
-    return this.http.get(
-      'https://localhost:7085/api/Authentication/updateProfile?email=' + email,
-      { headers }
-    );
+    return this.http.get(`${this.baseUrl}/updateProfile?email=` + email, {
+      headers,
+    });
   }
 
   //Update User Profile
