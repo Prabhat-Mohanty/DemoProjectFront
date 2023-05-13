@@ -16,7 +16,7 @@ import { UserComponent } from './components/home/user/user.component';
 
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { PrivacyComponent } from './components/privacy/privacy.component';
@@ -45,6 +45,7 @@ import { GetallRequestComponent } from './components/getall-request/getall-reque
 import { PricingComponent } from './components/pricing/pricing.component';
 import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { AuthInterceptorService } from './auth/auth-interceptor.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -101,7 +102,13 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     MatCardModule,
     NgxPaginationModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

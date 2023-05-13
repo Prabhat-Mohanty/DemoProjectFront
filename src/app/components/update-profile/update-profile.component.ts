@@ -118,7 +118,6 @@ export class UpdateProfileComponent implements OnInit, AfterViewInit {
     );
   }
   updateUser() {
-    debugger;
     const postData: any = this.updateuser.value;
     const formData = new FormData();
     formData.append('FirstName', postData.FirstName);

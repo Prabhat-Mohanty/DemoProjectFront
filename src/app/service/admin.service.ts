@@ -12,25 +12,18 @@ export class AdminService {
 
   // Get all books
   getAllBooks() {
-    const headers = new HttpHeaders().set('accept', '*/*');
-    return this.http.get(`${this.baseurl}/getAllBooksWithAuthorId`, {
-      headers,
-    });
+    return this.http.get(`${this.baseurl}/getAllBooksWithAuthorId`);
   }
   getAllBooksWithFilters(filter: {
     bookname: string;
     pageNumber: number;
     pageSize: number;
   }) {
-    const headers = new HttpHeaders().set('accept', '*/*');
     const bookname = filter.bookname;
     const pageNumber = filter.pageNumber;
     const pageSize = filter.pageSize;
     return this.http.get(
-      `${this.baseurl}/getAllBooksWithAuthorIdWithFilters?bookname=${bookname}&pageNumber=${pageNumber}&pageSize=${pageSize}`,
-      {
-        headers,
-      }
+      `${this.baseurl}/getAllBooksWithAuthorIdWithFilters?bookname=${bookname}&pageNumber=${pageNumber}&pageSize=${pageSize}`
     );
   }
 
@@ -39,65 +32,42 @@ export class AdminService {
   }
 
   editBook(id: number) {
-    const headers = new HttpHeaders().set('accept', '*/*');
-    return this.http.get(`${this.baseurl}/GetBookByIds/${id}`, { headers });
+    return this.http.get(`${this.baseurl}/GetBookByIds/${id}`);
   }
 
   updateBook(id: number, formData: any) {
-    const headers = new HttpHeaders().set('accept', '*/*');
-    return this.http.put(`${this.baseurl}/updatebook/${id}`, formData, {
-      headers,
-    });
+    return this.http.put(`${this.baseurl}/updatebook/${id}`, formData);
   }
 
   deleteBook(id: number) {
-    const headers = new HttpHeaders().set('accept', '*/*');
-    return this.http.delete(`${this.baseurl}/deleteBook/${id}`, {
-      headers,
-    });
+    return this.http.delete(`${this.baseurl}/deleteBook/${id}`);
   }
 
   // --------------------Author--------------------
   // Get all authors
   getAllAuthors() {
-    const headers = new HttpHeaders().set('accept', '*/*');
-    return this.http.get(`${this.baseurl}/getAllAuthor`, {
-      headers,
-    });
+    return this.http.get(`${this.baseurl}/getAllAuthor`);
   }
 
   //Add author
   addAuthor(authorName: any) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json-patch+json',
-        accept: '*/*',
-      }),
-    };
-    return this.http.post(`${this.baseurl}/addAuthor`, authorName, httpOptions);
+    return this.http.post(`${this.baseurl}/addAuthor`, authorName);
   }
 
   //Get Author By Id
   editAuthor(id: number) {
-    const headers = new HttpHeaders().set('accept', '*/*');
-    return this.http.get(`${this.baseurl}/getauthorbyid/${id}`, { headers });
+    return this.http.get(`${this.baseurl}/getauthorbyid/${id}`);
   }
 
   //Update Author
   updateAuthor(id: number, name: string) {
     const apiUrl = `${this.baseurl}/updateAuthor/${id}`;
     const body = `"${name}"`;
-    const headers = {
-      'Content-Type': 'application/json-patch+json',
-      Accept: '*/*',
-    };
-
-    return this.http.put(apiUrl, body, { headers });
+    return this.http.put(apiUrl, body);
   }
 
   //delete author
   deleteAuthor(id: number) {
-    const headers = new HttpHeaders().set('accept', '*/*');
     return this.http.delete(`${this.baseurl}/deleteAuthor/${id}`);
   }
 
@@ -105,69 +75,44 @@ export class AdminService {
 
   //Get All Publisher
   getAllPublisher() {
-    const headers = new HttpHeaders().set('accept', '*/*');
-    return this.http.get(`${this.baseurl}/getAllPublisher`, {
-      headers,
-    });
+    return this.http.get(`${this.baseurl}/getAllPublisher`);
   }
 
   //Add publisher
   addPublisher(publisherName: any) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json-patch+json',
-        accept: '*/*',
-      }),
-    };
-    return this.http.post(
-      `${this.baseurl}/addPublisher`,
-      publisherName,
-      httpOptions
-    );
+    return this.http.post(`${this.baseurl}/addPublisher`, publisherName);
   }
 
   // Get Publisher By Id
   editPublisher(id: number) {
-    const headers = new HttpHeaders().set('accept', '*/*');
-    return this.http.get(`${this.baseurl}/getpublisherbyid/${id}`, { headers });
+    return this.http.get(`${this.baseurl}/getpublisherbyid/${id}`);
   }
 
   //Update Publisher
   updatePublisher(id: number, name: string) {
     const apiUrl = `${this.baseurl}/updatePublisher/${id}`;
     const body = `"${name}"`;
-    const headers = {
-      'Content-Type': 'application/json-patch+json',
-      Accept: '*/*',
-    };
 
-    return this.http.put(apiUrl, body, { headers });
+    return this.http.put(apiUrl, body);
   }
 
   //delete publisher
   deletePublisher(id: number) {
-    const headers = new HttpHeaders().set('accept', '*/*');
     return this.http.delete(`${this.baseurl}/deletePublisher/${id}`);
   }
 
   // --------------------Issued Book Actions--------------------
 
   getAllRequest(status: string[], pageNumber: number, pageSize: number) {
-    const headers = new HttpHeaders().set('accept', '*/*');
     return this.http.get(
       // `${this.baseurl}/getpendingrequest?status=${status.join(' ')}`,
       `${this.baseurl}/getpendingrequest?status=${status.join(
         '&status='
-      )}&pageNumber=${pageNumber}&pageSize=${pageSize}`,
-      { headers }
+      )}&pageNumber=${pageNumber}&pageSize=${pageSize}`
     );
   }
 
   changeStatus(value: string, reqid: number, days: number) {
-    const headers = {
-      'Content-Type': 'application/json-patch+json',
-      Accept: '*/*',
-    };
     if (value == 'Delivered') {
       const now = Date.now();
       const date = new Date(now);
@@ -193,9 +138,7 @@ export class AdminService {
           value: issuedDate,
         },
       ];
-      return this.http.patch(`${this.baseurl}/status?reqid=${reqid}`, body, {
-        headers,
-      });
+      return this.http.patch(`${this.baseurl}/status?reqid=${reqid}`, body);
     }
     const body = [
       {
@@ -204,8 +147,11 @@ export class AdminService {
         value: value,
       },
     ];
-    return this.http.patch(`${this.baseurl}/status?reqid=${reqid}`, body, {
-      headers,
-    });
+    return this.http.patch(`${this.baseurl}/status?reqid=${reqid}`, body);
+  }
+
+  // --------------------Contact Us--------------------
+  contactUs(data: any) {
+    return this.http.post(`${this.baseurl}/contact`, data);
   }
 }

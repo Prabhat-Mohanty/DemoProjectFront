@@ -116,7 +116,7 @@ export class BookDetailComponent implements OnInit {
       },
       (error) => {
         this.spinner.hide();
-        console.log(error);
+        this.toast.error(error.error.message);
       }
     );
   }

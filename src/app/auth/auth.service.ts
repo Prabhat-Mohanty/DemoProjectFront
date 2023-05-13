@@ -21,7 +21,7 @@ export class AuthService {
 
   //For Register
   register(formData: any) {
-    let userParam: HttpParams = new HttpParams().set('role', 'Admin');
+    let userParam: HttpParams = new HttpParams().set('role', 'User');
     return this.http.post(this.baseUrl, formData, {
       params: userParam,
     });
@@ -62,15 +62,9 @@ export class AuthService {
     newPassword: string | null | undefined,
     token: string | null | undefined
   ): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + token,
-      }),
-    };
     const url = `${this.baseUrl}/user-reset-password`;
     const body = { oldpassword: oldPassword, newpassword: newPassword };
-    return this.http.post(url, body, httpOptions);
+    return this.http.post(url, body);
   }
 
   //Check the user is logged in or not
@@ -93,7 +87,6 @@ export class AuthService {
   //Logout
   logout() {
     this.isAdmin.next('');
-    // localStorage.removeItem('role');
     return localStorage.removeItem('token');
   }
 
@@ -112,10 +105,7 @@ export class AuthService {
 
   //Update User Profile
   updateProfile(formData: FormData) {
-    const headers = new HttpHeaders()
-      .set('accept', '*/*')
-      .set('Authorization', 'Bearer ' + this.etoken);
     const url = `${this.baseUrl}/updateProfile`;
-    return this.http.post(url, formData, { headers });
+    return this.http.post(url, formData);
   }
 }

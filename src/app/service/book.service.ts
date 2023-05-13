@@ -68,11 +68,8 @@ export class BookService {
       bookId: bid,
       days: noOfdays,
     };
-    const headers = new HttpHeaders({
-      Authorization: 'Bearer ' + this.token,
-      'Content-Type': 'application/json',
-    });
-    return this.http.post(this.userUrl, issueData, { headers });
+
+    return this.http.post(this.userUrl, issueData);
   }
 
   getBookById(id: number) {
