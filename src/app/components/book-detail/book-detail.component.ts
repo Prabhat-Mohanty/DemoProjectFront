@@ -4,14 +4,15 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookService } from 'src/app/service/book.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { environment } from 'src/environments/environment';
+// import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-book-detail',
   templateUrl: './book-detail.component.html',
   styleUrls: ['./book-detail.component.css'],
 })
 export class BookDetailComponent implements OnInit {
-  imgurl: string = environment.imgUrl;
+  // imgurl: string = environment.imgUrl;
+  imgurl: string = 'https://localhost:7085/img/';
   bid: number = 0;
   book: any;
   suggestedBooks: any;

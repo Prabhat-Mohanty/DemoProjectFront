@@ -6,7 +6,7 @@ import { BookService } from 'src/app/service/book.service';
 
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { environment } from 'src/environments/environment';
+// import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-update-profile',
@@ -14,7 +14,8 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./update-profile.component.css'],
 })
 export class UpdateProfileComponent implements OnInit, AfterViewInit {
-  imgurl: string = environment.imgUrl;
+  // imgurl: string = environment.imgUrl;
+  imgurl: string = 'https://localhost:7085/img/';
   constructor(
     private auth: AuthService,
     private Book: BookService,

@@ -17,7 +17,7 @@ import {
 } from 'rxjs';
 
 import { BookService } from 'src/app/service/book.service';
-import { environment } from 'src/environments/environment';
+// import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-book-ordered',
@@ -25,7 +25,8 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./book-ordered.component.css'],
 })
 export class BookOrderedComponent implements OnInit, AfterViewInit {
-  imgurl: string = environment.imgUrl;
+  // imgurl: string = environment.imgUrl;
+  imgurl: string = 'https://localhost:7085/img/';
   issuedbook: any;
 
   status = ['pending', 'approved', 'completed', 'due', 'rejected', 'delivered'];

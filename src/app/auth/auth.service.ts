@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import jwt_decode from 'jwt-decode';
 import { BookService } from '../service/book.service';
-import { environment } from 'src/environments/environment';
+// import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +17,8 @@ export class AuthService {
 
   constructor(private http: HttpClient, private bookService: BookService) {}
 
-  baseUrl: string = environment.authenticateController;
+  // baseUrl: string = environment.authenticateController;
+  baseUrl: string = 'https://localhost:7085/api/Authentication';
 
   //For Register
   register(formData: any) {
