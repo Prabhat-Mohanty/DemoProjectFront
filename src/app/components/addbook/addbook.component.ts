@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
-// import { environment } from 'src/environments/environment';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-addbook',
@@ -15,8 +15,8 @@ import { MatDialog } from '@angular/material/dialog';
 export class AddbookComponent implements OnInit {
   books: any;
   searchResultCount: number = 0;
-  // imgurl: string = environment.imgUrl;
-  imgurl: string = 'https://localhost:7085/img/';
+  imgurl = environment.imgUrl;
+
   constructor(
     private adminService: AdminService,
     private toast: ToastrService,

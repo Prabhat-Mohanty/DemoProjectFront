@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 // import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -8,8 +9,7 @@ import { Injectable } from '@angular/core';
 export class AdminService {
   constructor(private http: HttpClient) {}
 
-  // baseurl = environment.adminController;
-  baseurl = 'https://localhost:7085/api/AdminBook';
+  baseurl = environment.adminController;
 
   // Get all books
   getAllBooks() {

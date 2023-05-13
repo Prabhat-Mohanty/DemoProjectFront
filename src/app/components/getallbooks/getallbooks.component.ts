@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from 'src/app/service/admin.service';
+import { environment } from 'src/environments/environment';
 // import { environment } from 'src/environments/environment';
 
 @Component({
@@ -8,9 +9,7 @@ import { AdminService } from 'src/app/service/admin.service';
   styleUrls: ['./getallbooks.component.css'],
 })
 export class GetallbooksComponent implements OnInit {
-  // imgurl: string = environment.imgUrl;
-  imgurl: string = 'https://localhost:7085/img/';
-
+  imgurl: string = environment.imgUrl;
   constructor(private adminService: AdminService) {}
   ngOnInit(): void {
     this.getAllBook();

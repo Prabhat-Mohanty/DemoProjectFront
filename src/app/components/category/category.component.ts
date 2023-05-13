@@ -14,6 +14,7 @@ import {
   switchMap,
 } from 'rxjs';
 import { BookService } from 'src/app/service/book.service';
+import { environment } from 'src/environments/environment';
 // import { environment } from 'src/environments/environment';
 
 @Component({
@@ -22,9 +23,7 @@ import { BookService } from 'src/app/service/book.service';
   styleUrls: ['./category.component.css'],
 })
 export class CategoryComponent implements OnInit, AfterViewInit {
-  // imgurl: string = environment.imgUrl;
-  imgurl: string = 'https://localhost:7085/img/';
-
+  imgurl: string = environment.imgUrl;
   books: any;
   imageSrc = '/bookImages/B1/10minutes.jpg';
   isChecked = false;

@@ -2,17 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import jwt_decode from 'jwt-decode';
+import { environment } from 'src/environments/environment';
 // import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BookService {
-  // baseUrl: string = environment.adminController;
-  baseUrl: string = 'https://localhost:7085/api/AdminBook';
-
-  // userUrl: string = environment.userController;
-  userUrl: string = 'https://localhost:7085/api/User';
+  baseUrl: string = environment.adminController;
+  userUrl: string = environment.userController;
 
   constructor(private http: HttpClient) {
     this.decodeToken();
