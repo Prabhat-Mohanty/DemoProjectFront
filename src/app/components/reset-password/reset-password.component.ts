@@ -68,7 +68,7 @@ export class ResetPasswordComponent implements OnInit {
         (res: any) => {
           this.toast.success(res.message, res.status);
           this.spinner.hide();
-          this.router.navigate(['/login']);
+          this.router.navigate(['/signin']);
         },
         (error: any) => {
           if (error.error.message != null) {

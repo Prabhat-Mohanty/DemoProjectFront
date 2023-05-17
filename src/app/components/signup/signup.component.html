@@ -199,6 +199,7 @@
                     <label for="Password">Password</label>
                     <input class="form-control" type="password" name="password" id="Password" placeholder="Password"
                       formControlName="Password">
+                    <!-- <i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i> -->
                     <!-- Validation -->
                     <div *ngIf="Password && Password.invalid && Password.touched">
                       <div class="text-danger" *ngIf="Password?.errors?.['required']">Password is required</div>

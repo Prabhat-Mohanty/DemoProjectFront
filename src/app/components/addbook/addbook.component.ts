@@ -272,9 +272,11 @@ export class AddbookComponent implements OnInit {
       if (result) {
         this.adminService.deleteBook(id).subscribe(
           (res) => {
+            debugger;
             this.toast.success('Book has been deleted.');
           },
           (error) => {
+            debugger;
             this.toast.error(error.error);
           }
         );

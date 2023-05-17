@@ -1,0 +1,61 @@
+<div id="wrapper">
+  <ul class="h3 h3-striped">
+    <div class="col-md-12 d-flex flex-row mb-3">
+      <input class="form-control search me-2 p-2" type="text" placeholder="Search By Email" autocomplete="off"
+        (keyup)="onClick()" [(ngModel)]="filterObj.searchTerm">
+      <span class="pt-4" style="font-size: 18px; margin-top: 10px;">PageSize</span>
+      <select class="form-select form-select-sm" aria-label=".form-select-sm example" (change)="pageSizeFunc($event)">
+        <option selected value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+      </select>
+    </div>
+    <li>
+      <div class="container text-center">
+        <div class="row">
+          <div class="col heading">
+            Name
+          </div>
+          <div class="col heading">
+            Email
+          </div>
+          <div class="col heading">
+            PhoneNumber
+          </div>
+        </div>
+      </div>
+    </li>
+    <li *ngFor="let contactDetail of contactDetails?.contactList">
+      <input type="checkbox" checked>
+      <i></i>
+      <h2>
+        <div class="container text-center">
+          <div class="row">
+            <div class="col">
+              {{contactDetail.name}}
+            </div>
+            <div class="col">
+              {{contactDetail.email}}
+            </div>
+            <div class="col">
+              {{contactDetail.phoneNumber}}
+            </div>
+          </div>
+        </div>
+      </h2>
+      <h3 class="px-5">
+        <p>
+          {{contactDetail.subject}}
+        </p>
+        {{contactDetail.message}}
+      </h3>
+    </li>
+  </ul>
+  <div class="text-center my-3">
+    <button class="btn btn-sm btn-primary padding me-1" (click)="decrement()"
+      [disabled]="filterObj.pageNumber <= 1">Prev</button>
+    <span>{{filterObj.pageNumber}}</span>
+    <button class="btn btn-sm btn-primary padding ms-1" (click)="increment()"
+      [disabled]="filterObj.pageNumber > (contactDetails?.total /filterObj.pageSize) ">Next</button>
+  </div>
+</div>

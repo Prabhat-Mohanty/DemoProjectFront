@@ -20,7 +20,6 @@ export class AddpublisherComponent implements OnInit {
   }
 
   getAllPublisher() {
-    // debugger;
     this.adminService.getAllPublisher().subscribe(
       (res) => {
         this.publishers = res;

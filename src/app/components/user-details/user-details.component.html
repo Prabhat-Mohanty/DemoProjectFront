@@ -1,0 +1,58 @@
+<div id="wrapper">
+  <ul class="h3 h3-striped">
+    <li>
+      <div class="container text-center">
+        <div class="row">
+          <div class="col heading">
+            Name
+          </div>
+          <div class="col heading">
+            Email
+          </div>
+          <div class="col heading">
+            PhoneNumber
+          </div>
+          <div class="col heading">
+            EmailConfirmed
+          </div>
+        </div>
+      </div>
+    </li>
+    <li *ngFor="let userDetail of userDetails">
+      <input type="checkbox" checked>
+      <i></i>
+      <h2>
+        <div class="container">
+          <div class="row text-center">
+            <div class="col">
+              {{userDetail.firstName}}
+            </div>
+            <div class="col">
+              {{userDetail.userName}}
+            </div>
+            <div class="col">
+              {{userDetail.phoneNumber}}
+            </div>
+            <div class="col">
+              {{userDetail.emailConfirmed}}
+            </div>
+          </div>
+        </div>
+      </h2>
+      <h3 class="px-5">
+        <table id="customers">
+          <tr>
+            <th>Book Name</th>
+            <th>Applied Date</th>
+            <th>Days Left</th>
+          </tr>
+          <tr *ngFor="let bookDetail of userDetail.issuedBooks">
+            <td>{{bookDetail.bookId}}</td>
+            <td>{{bookDetail.appliedDate | date:'dd/MM/yyyy'}}</td>
+            <td>{{bookDetail.dueDate | date:'dd/MM/yyyy'}}</td>
+          </tr>
+        </table>
+      </h3>
+    </li>
+  </ul>
+</div>

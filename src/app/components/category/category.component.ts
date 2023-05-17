@@ -339,6 +339,14 @@ export class CategoryComponent implements OnInit, AfterViewInit {
       }
     }
 
+    if (this.listOfGenre.length < 1) {
+      const allBooks = [];
+      for (let index = 0; index < this.slidesStore.length; index++) {
+        allBooks.push(this.slidesStore[index].genre);
+      }
+      return allBooks;
+    }
+
     return this.listOfGenre;
   }
 

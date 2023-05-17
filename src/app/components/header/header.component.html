@@ -77,16 +77,19 @@
                   <li class="nav-item" *ngIf="isLogged == true && isAdmin != 'Admin'">
                     <a routerLink="bookOrdered" class="nav-link">Orders</a>
                   </li>
-                  <li class="nav-item">
+                  <li class="nav-item" *ngIf="isLogged == true && isAdmin != 'Admin'">
                     <a routerLink="termsandconditions" class="nav-link">Terms & Conditions</a>
                   </li>
-                  <li class="nav-item">
+                  <li class="nav-item" *ngIf="isLogged == true && isAdmin != 'Admin'">
                     <a routerLink="privacy" class="nav-link">Privacy Policy</a>
                   </li>
                 </ul>
               </li>
               <li class="nav-item" *ngIf="isLogged == true && isAdmin == 'Admin'">
                 <a routerLink="getAllRequest" class="nav-link">Requests</a>
+              </li>
+              <li class="nav-item" *ngIf="isLogged == true && isAdmin == 'Admin'">
+                <a routerLink="contact-list" class="nav-link">Contact List</a>
               </li>
               <li class="nav-item">
                 <a routerLink="contactus" class="nav-link" *ngIf="isAdmin != 'Admin'">Contact </a>

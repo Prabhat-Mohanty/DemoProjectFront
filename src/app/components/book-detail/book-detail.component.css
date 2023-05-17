@@ -11,7 +11,7 @@
 .d-block {
   border-radius: 0 10% 0 10%;
   height: 20rem;
-  border: 3px solid black;
+  border: 2px solid black;
 }
 .BookName {
   /* Font & Text */
@@ -53,10 +53,11 @@
 }
 
 .discription {
-  font-size: calc(100% + 4px);
+  font-size: calc(100% + 3px);
   margin-left: 2%;
-  margin-right: 39px;
+  margin-right: 65px;
   padding: inherit;
+  line-height: 23px;
 }
 .image-rounded {
   height: 62px;
@@ -167,10 +168,14 @@ button.ms-1 {
 }
 
 .carousel-control-next-icon {
-  background-color: #000000;
+  background-color: transparent;
 }
 .carousel-control-prev-icon {
-  background-color: #000000;
+  background-color: transparent;
+}
+
+.carousel-control-next {
+  right: 49px;
 }
 
 .mr-3 {
@@ -195,4 +200,10 @@ button.ms-1 {
 .a-img {
   width: 170px;
   height: 200px;
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+  top: 80px;
+  bottom: 20px;
 }

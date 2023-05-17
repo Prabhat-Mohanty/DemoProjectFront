@@ -32,7 +32,7 @@ export class AddauthorComponent implements OnInit {
   }
 
   getAllAuthor() {
-    // debugger;
+   
     this.adminService.getAllAuthors().subscribe(
       (res) => {
         this.authors = res;

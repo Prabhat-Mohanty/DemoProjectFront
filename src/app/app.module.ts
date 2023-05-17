@@ -11,7 +11,6 @@ import { GalleryComponent } from './components/gallery/gallery.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ContactusComponent } from './components/contactus/contactus.component';
 import { AboutusComponent } from './components/aboutus/aboutus.component';
-import { AdminComponent } from './components/home/admin/admin.component';
 import { UserComponent } from './components/home/user/user.component';
 
 import { ToastrModule } from 'ngx-toastr';
@@ -46,6 +45,8 @@ import { PricingComponent } from './components/pricing/pricing.component';
 import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
+import { ContactDetailsComponent } from './components/contact-details/contact-details.component';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +58,6 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
     PageNotFoundComponent,
     ContactusComponent,
     AboutusComponent,
-    AdminComponent,
     UserComponent,
     PrivacyComponent,
     CategoryComponent,
@@ -76,6 +76,8 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
     PricingComponent,
     TermsAndConditionsComponent,
     ConfirmDialogComponent,
+    ContactDetailsComponent,
+    UserDetailsComponent,
   ],
   imports: [
     BrowserModule,

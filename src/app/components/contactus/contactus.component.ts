@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
 
@@ -10,12 +10,33 @@ import { AdminService } from 'src/app/service/admin.service';
 })
 export class ContactusComponent {
   contactForm = new FormGroup({
-    Name: new FormControl(''),
-    Email: new FormControl(''),
-    PhoneNumber: new FormControl(''),
-    Subject: new FormControl(''),
-    Message: new FormControl(''),
+    Name: new FormControl('', [Validators.required]),
+    Email: new FormControl('', [Validators.required, Validators.email]),
+    PhoneNumber: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^[6-9]\\d{9}$'),
+    ]),
+    Subject: new FormControl('', [Validators.required]),
+    Message: new FormControl('', [Validators.required]),
   });
+
+  // Validation methods for all form fields
+  get Name() {
+    return this.contactForm.get('Name');
+  }
+  get Email() {
+    return this.contactForm.get('Email');
+  }
+  get PhoneNumber() {
+    return this.contactForm.get('PhoneNumber');
+  }
+  get Subject() {
+    return this.contactForm.get('Subject');
+  }
+  get Message() {
+    return this.contactForm.get('Subject');
+  }
+
   constructor(
     private adminService: AdminService,
     private toast: ToastrService

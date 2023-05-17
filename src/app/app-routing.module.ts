@@ -15,7 +15,6 @@ import { ForgetPasswordComponent } from './components/forget-password/forget-pas
 import { UserPasswordResetComponent } from './components/user-password-reset/user-password-reset.component';
 import { BookDetailComponent } from './components/book-detail/book-detail.component';
 import { BookOrderedComponent } from './components/book-ordered/book-ordered.component';
-import { AdminComponent } from './components/home/admin/admin.component';
 import { SigninModalComponent } from './components/signin-modal/signin-modal.component';
 import { UpdateProfileComponent } from './components/update-profile/update-profile.component';
 import { AddbookComponent } from './components/addbook/addbook.component';
@@ -25,16 +24,15 @@ import { GetallbooksComponent } from './components/getallbooks/getallbooks.compo
 import { GetallRequestComponent } from './components/getall-request/getall-request.component';
 import { PricingComponent } from './components/pricing/pricing.component';
 import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
+import { ContactDetailsComponent } from './components/contact-details/contact-details.component';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
 
 const routes: Routes = [
   {
     path: '',
     component: UserComponent,
   },
-  {
-    path: 'Admin',
-    component: AdminComponent,
-  },
+
   {
     path: 'modalsignin',
     component: SigninModalComponent,
@@ -114,6 +112,14 @@ const routes: Routes = [
   {
     path: 'reset-password',
     component: ResetPasswordComponent,
+  },
+  {
+    path: 'contact-list',
+    component: ContactDetailsComponent,
+  },
+  {
+    path: 'user-details',
+    component: UserDetailsComponent,
   },
   {
     path: 'forget-password',

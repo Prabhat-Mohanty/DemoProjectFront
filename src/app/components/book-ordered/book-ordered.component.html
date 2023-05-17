@@ -31,8 +31,7 @@
                 <tr
                   *ngFor="let issuebook of issuedbook | paginate: { itemsPerPage: pageSize, currentPage: currentPage }; let i = index">
                   <td class=" text-center">{{currentPage <= 1 ? i+1 : ( 1 + i + ((currentPage-1) * 10))}}</td>
-                  <td><img [src]="imgurl+issuebook.images[0]" [alt]="issuebook.bookName"
-                      width="100"></td>
+                  <td><img [src]="imgurl+issuebook.images[0]" [alt]="issuebook.bookName" width="100"></td>
                   <td class="text-center">{{issuebook.bookName}}</td>
                   <td class="text-center">{{issuebook.appliedDate | date:'dd/MM/yyyy'}}</td>
                   <td class="text-center">{{ issuebook.status != 'Pending' && issuebook.status != 'Approved' ?
@@ -44,7 +43,7 @@
                       issuebook.daysLeft + ' days' : 'Due' ) }}</span></td>
                   <td class="text-center"><span
                       [ngClass]="issuebook.status == 'Pending' ? 'badge text-bg-warning' : (issuebook.status == 'Approved' ? 'badge text-bg-info' : (issuebook.status == 'Rejected' ? 'badge text-bg-danger' : (issuebook.status == 'Due' ? 'badge text-bg-primary' : (issuebook.status == 'Delivered' ? 'badge text-bg-secondary' : 'badge text-bg-success'))))">{{issuebook.status
-                      == 'Delivered' ? 'Return' :issuebook.status }}</span>
+                      == 'Delivered' ? 'In use' :issuebook.status }}</span>
                   </td>
                 </tr>
               </tbody>

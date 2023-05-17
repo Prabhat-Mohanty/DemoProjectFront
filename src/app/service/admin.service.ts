@@ -64,7 +64,8 @@ export class AdminService {
   updateAuthor(id: number, name: string) {
     const apiUrl = `${this.baseurl}/updateAuthor/${id}`;
     const body = `"${name}"`;
-    return this.http.put(apiUrl, body);
+    const headers = { 'Content-Type': 'application/json' };
+    return this.http.put(apiUrl, body, { headers: headers });
   }
 
   //delete author
@@ -93,8 +94,8 @@ export class AdminService {
   updatePublisher(id: number, name: string) {
     const apiUrl = `${this.baseurl}/updatePublisher/${id}`;
     const body = `"${name}"`;
-
-    return this.http.put(apiUrl, body);
+    const headers = { 'Content-Type': 'application/json' };
+    return this.http.put(apiUrl, body, { headers: headers });
   }
 
   //delete publisher
@@ -154,5 +155,20 @@ export class AdminService {
   // --------------------Contact Us--------------------
   contactUs(data: any) {
     return this.http.post(`${this.baseurl}/contact`, data);
+  }
+
+  getContactDetails(email: string, pageSize: number, pageNumber: number) {
+    if (email.length >= 1) {
+      return this.http.get(
+        `${this.baseurl}/getContactList?email=${email}&pageSize=${pageSize}&pageNumber=${pageNumber}`
+      );
+    }
+    return this.http.get(
+      `${this.baseurl}/getContactList?pageSize=${pageSize}&pageNumber=${pageNumber} `
+    );
+  }
+
+  getUserDetails() {
+    return this.http.get(`${this.baseurl}/getUserList`);
   }
 }

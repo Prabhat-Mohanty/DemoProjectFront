@@ -20,12 +20,6 @@ export class HeaderComponent implements OnInit {
     this.auth.isAdmin.subscribe((res) => {
       this.isAdmin = res;
     });
-
-    // this.auth.isLoggedInUsername.subscribe((res) => {
-    //   this.isLoggedInUsername = res;
-    //   debugger;
-    //   console.log(res);
-    // });
   }
 
   logout() {
