@@ -1,0 +1,47 @@
+/* .card {
+  width: 300px;
+  margin: 20px;
+  border: none;
+}
+.card .icon {
+  font-size: 100px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.card .count {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+.card .item-name {
+  text-align: center;
+  font-size: 18px;
+}
+
+.b {
+  border: 1px solid black;
+} */
+
+.card {
+  width: 300px;
+  margin: 20px;
+  border: none;
+}
+.card .icon {
+  font-size: 60px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.card .count {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+.card .item-name {
+  text-align: center;
+  font-size: 18px;
+}
+
+a {
+  color: black;
+}

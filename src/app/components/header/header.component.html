@@ -54,14 +54,23 @@
                 <a routerLink="" class="nav-link">Home</a>
               </li>
               <li class="nav-item" *ngIf="isLogged == true && isAdmin == 'Admin'">
-                <a routerLink="addauthor" class="nav-link">Author</a>
+                <a routerLink="adminDasboard" class="nav-link">Dashboard</a>
               </li>
               <li class="nav-item" *ngIf="isLogged == true && isAdmin == 'Admin'">
-                <a routerLink="addbook" class="nav-link">Book</a>
+                <a href="#" class="nav-link dropdown-toggle">Manage</a>
+                <ul class="dropdown-menu">
+                  <li class="nav-item" *ngIf="isLogged == true && isAdmin == 'Admin'">
+                    <a routerLink="addauthor" class="nav-link">Author</a>
+                  </li>
+                  <li class="nav-item" *ngIf="isLogged == true && isAdmin == 'Admin'">
+                    <a routerLink="addbook" class="nav-link">Book</a>
+                  </li>
+                  <li class="nav-item" *ngIf="isLogged == true && isAdmin == 'Admin'">
+                    <a routerLink="addpublisher" class="nav-link">Publisher</a>
+                  </li>
+                </ul>
               </li>
-              <li class="nav-item" *ngIf="isLogged == true && isAdmin == 'Admin'">
-                <a routerLink="addpublisher" class="nav-link">Publisher</a>
-              </li>
+
               <li class="nav-item" *ngIf="isAdmin != 'Admin'">
                 <a routerLink="aboutus" class="nav-link">About</a>
               </li>
@@ -89,7 +98,7 @@
                 <a routerLink="getAllRequest" class="nav-link">Requests</a>
               </li>
               <li class="nav-item" *ngIf="isLogged == true && isAdmin == 'Admin'">
-                <a routerLink="contact-list" class="nav-link">Contact List</a>
+                <a routerLink="contact-list" class="nav-link">Contact Request</a>
               </li>
               <li class="nav-item">
                 <a routerLink="contactus" class="nav-link" *ngIf="isAdmin != 'Admin'">Contact </a>

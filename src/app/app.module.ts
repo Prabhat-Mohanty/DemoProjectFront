@@ -47,6 +47,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { ContactDetailsComponent } from './components/contact-details/contact-details.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
+import { AdminDashBoardComponent } from './components/dashboard/admin-dash-board/admin-dash-board.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -78,6 +79,7 @@ import { UserDetailsComponent } from './components/user-details/user-details.com
     ConfirmDialogComponent,
     ContactDetailsComponent,
     UserDetailsComponent,
+    AdminDashBoardComponent,
   ],
   imports: [
     BrowserModule,

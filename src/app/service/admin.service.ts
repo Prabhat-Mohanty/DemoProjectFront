@@ -114,7 +114,7 @@ export class AdminService {
     );
   }
 
-  changeStatus(value: string, reqid: number, days: number) {
+  changeStatus(value: string, reqid: number, days: number, email: string) {
     if (value == 'Delivered') {
       const now = Date.now();
       const date = new Date(now);
@@ -140,7 +140,10 @@ export class AdminService {
           value: issuedDate,
         },
       ];
-      return this.http.patch(`${this.baseurl}/status?reqid=${reqid}`, body);
+      return this.http.patch(
+        `${this.baseurl}/status?reqid=${reqid}&email=${email}`,
+        body
+      );
     }
     const body = [
       {
@@ -149,7 +152,10 @@ export class AdminService {
         value: value,
       },
     ];
-    return this.http.patch(`${this.baseurl}/status?reqid=${reqid}`, body);
+    return this.http.patch(
+      `${this.baseurl}/status?reqid=${reqid}&email=${email}`,
+      body
+    );
   }
 
   // --------------------Contact Us--------------------
@@ -170,5 +176,9 @@ export class AdminService {
 
   getUserDetails() {
     return this.http.get(`${this.baseurl}/getUserList`);
+  }
+
+  getStatusCount() {
+    return this.http.get(`${this.baseurl}/getStats`);
   }
 }

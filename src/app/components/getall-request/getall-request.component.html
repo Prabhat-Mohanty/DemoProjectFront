@@ -1,8 +1,15 @@
+<!-- spinner -->
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="rgb(50, 105, 138)" type="square-jelly-box"
+  [fullScreen]="true">
+  <h3 style="color: rgb(255, 255, 255);"> Please wait it's Loading... </h3>
+</ngx-spinner>
+
 <div class="container mt-5">
   <div class="col-md-12 col-12 col-sm-12">
     <div class="card">
       <div>
-        <h2 class="text-center"><ins>Ordered List</ins></h2>
+        <h2 class="text-center"><ins>{{selectedValue == undefined ? 'Orders ' : selectedValue}} List</ins>
+        </h2>
       </div>
       <div class="card-body">
         <div class="d-flex">
@@ -49,18 +56,18 @@
                   </td>
                   <td class="text-center" *ngIf="pendingRequest.status == 'Pending'">
                     <button class="btn btn-sm me-2 btn-info"
-                      (click)="changeStatus('Approved',pendingRequest.id,pendingRequest.days)">Approve</button>
+                      (click)="changeStatus('Approved',pendingRequest.id,pendingRequest.days,pendingRequest.userEmail)">Approve</button>
                     <button class="btn btn-sm btn-danger"
-                      (click)="changeStatus('Rejected',pendingRequest.id,pendingRequest.days)">Reject</button>
+                      (click)="changeStatus('Rejected',pendingRequest.id,pendingRequest.days,pendingRequest.userEmail)">Reject</button>
                   </td>
                   <td class="text-center" *ngIf="pendingRequest.status == 'Approved'">
                     <button class="btn btn-sm btn-secondary"
-                      (click)="changeStatus('Delivered',pendingRequest.id,pendingRequest.days)">Delivered</button>
+                      (click)="changeStatus('Delivered',pendingRequest.id,pendingRequest.days,pendingRequest.userEmail)">Delivered</button>
                   </td>
                   <td class="text-center"
                     *ngIf="pendingRequest.status == 'Delivered' || pendingRequest.status == 'Due'">
                     <button class="btn btn-sm btn-success"
-                      (click)="changeStatus('Completed',pendingRequest.id,pendingRequest.days)">Completed</button>
+                      (click)="changeStatus('Completed',pendingRequest.id,pendingRequest.days,pendingRequest.userEmail)">Completed</button>
                   </td>
                   <td class="text-center" *ngIf="pendingRequest.status == 'Completed'">
                     <!-- <i class="fa-regular fa-circle-xmark fa-lg" style="color: #b80a0a;"></i> -->

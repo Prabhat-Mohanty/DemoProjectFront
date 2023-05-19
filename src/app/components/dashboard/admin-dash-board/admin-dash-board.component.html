@@ -1,0 +1,112 @@
+<div class="container my-5 p-5">
+  <div class="row">
+    <div class="col-md-4">
+      <a routerLink="/addbook">
+        <div class="card">
+          <div class="card-body">
+            <div class="icon">
+              <i class="fa-solid fa-book" style="color: #2f7e25;"></i>
+            </div>
+            <div class="count">
+              {{allStats?.books}}
+            </div>
+            <div class="item-name">
+              Books Listed
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-md-4">
+      <a routerLink="/requestList/Delivered">
+        <div class="card">
+          <div class="card-body">
+            <div class="icon">
+              <i class="fa-sharp fa-solid fa-rotate-left" style="color: #84702a;"></i>
+            </div>
+            <div class="count">
+              {{allStats?.stats[2]['count']}}
+            </div>
+            <div class="item-name">
+              Books Not Returned Yet
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-md-4">
+      <a routerLink="/user-details">
+        <div class="card">
+          <div class="card-body">
+            <div class="icon">
+              <i class="fa-sharp fa-solid fa-users" style="color: #931f1f;"></i>
+            </div>
+            <div class="count">
+              {{allStats?.users}}
+            </div>
+            <div class="item-name">
+              Registered Users
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-md-4">
+      <a routerLink="/addauthor">
+        <div class="card">
+          <div class="card-body">
+            <div class="icon">
+              <i class="fa-sharp fa-solid fa-user" style="color: #dd1919;"></i>
+            </div>
+            <div class="count">
+              {{allStats?.authors}}
+            </div>
+            <div class="item-name">
+              Authors Listed
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+
+    <div class="col-md-4">
+      <a routerLink="/addpublisher">
+        <div class="card">
+          <div class="card-body">
+            <div class="icon">
+              <i class="fa-sharp fa-solid fa-user" style="color: #2c7727;"></i>
+            </div>
+            <div class="count">
+              {{allStats?.publishers}}
+            </div>
+            <div class="item-name">
+              Publisher Listed
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-md-4">
+      <a routerLink="/requestList/Pending">
+        <div class="card">
+          <div class="card-body">
+            <div class="icon">
+              <i class="fa-sharp fa-solid fa-arrow-trend-up"></i>
+            </div>
+            <div class="count">
+              {{allStats?.stats[3]['count']}}
+            </div>
+            <div class="item-name">
+              Requests For Book
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

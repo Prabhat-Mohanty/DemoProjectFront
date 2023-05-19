@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from 'src/app/service/admin.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-getall-request',
@@ -10,7 +12,9 @@ import { ToastrService } from 'ngx-toastr';
 export class GetallRequestComponent implements OnInit {
   constructor(
     private adminService: AdminService,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private spinner: NgxSpinnerService,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   pendingRequests: any;
@@ -22,20 +26,24 @@ export class GetallRequestComponent implements OnInit {
     pageSize: 5,
   };
 
-  changeStatus(value: string, reqid: number, days: number) {
-    this.adminService.changeStatus(value, reqid, days).subscribe(
+  changeStatus(value: string, reqid: number, days: number, email: string) {
+    this.spinner.show();
+    this.adminService.changeStatus(value, reqid, days, email).subscribe(
       (res) => {
         this.callAPI();
+        this.spinner.hide();
       },
       (error) => {
         this.callAPI();
         console.log(error.error);
+        this.spinner.hide();
       }
     );
   }
 
   updateStatusArray(event: Event) {
     const target = event.target as HTMLSelectElement;
+    this.selectedValue = target.value;
     const selectedValue = target.value;
     if (selectedValue.length > 0) {
       this.status = [];
@@ -60,8 +68,18 @@ export class GetallRequestComponent implements OnInit {
     this.callAPI();
   }
 
+  selectedValue: string = '';
+  statusFromRoute: string = '';
   ngOnInit(): void {
-    this.callAPI();
+    this.statusFromRoute = this.activatedRoute.snapshot.params['status'];
+    this.selectedValue = this.statusFromRoute;
+    if (this.statusFromRoute != undefined) {
+      this.status.length = 0;
+      this.status.push(this.statusFromRoute);
+      this.callAPI();
+    } else {
+      this.callAPI();
+    }
   }
 
   callAPI() {
@@ -74,13 +92,11 @@ export class GetallRequestComponent implements OnInit {
       .subscribe(
         (res) => {
           this.pendingRequests = res;
-          // console.log(Object.keys(res).length);
         },
         (error) => {
           this.toast.error(error.error);
         }
       );
   }
-
   issuedbook: any;
 }

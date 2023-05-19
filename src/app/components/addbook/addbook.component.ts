@@ -260,6 +260,8 @@ export class AddbookComponent implements OnInit {
       }
     );
   }
+
+  userDetail: any;
   delete(id: number) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: {
@@ -272,11 +274,21 @@ export class AddbookComponent implements OnInit {
       if (result) {
         this.adminService.deleteBook(id).subscribe(
           (res) => {
-            debugger;
-            this.toast.success('Book has been deleted.');
+            if (typeof res == 'string') {
+              this.toast.success('Book has been deleted. ');
+              this.onClick();
+            } else {
+              this.userDetail = res;
+              this.toast.error(
+                `You can delete this book after ${Math.floor(
+                  this.userDetail.days
+                )} days, because this book is rented by ${this.userDetail.name}`
+              );
+              this.onClick();
+            }
           },
           (error) => {
-            debugger;
+            console.log(error.error);
             this.toast.error(error.error);
           }
         );

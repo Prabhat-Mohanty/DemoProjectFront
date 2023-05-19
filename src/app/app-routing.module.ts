@@ -26,6 +26,7 @@ import { PricingComponent } from './components/pricing/pricing.component';
 import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
 import { ContactDetailsComponent } from './components/contact-details/contact-details.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
+import { AdminDashBoardComponent } from './components/dashboard/admin-dash-board/admin-dash-board.component';
 
 const routes: Routes = [
   {
@@ -95,6 +96,11 @@ const routes: Routes = [
     component: AddbookComponent,
   },
   {
+    path: 'adminDasboard',
+    canActivate: [AuthGuard],
+    component: AdminDashBoardComponent,
+  },
+  {
     path: 'addauthor',
     canActivate: [AuthGuard],
     component: AddauthorComponent,
@@ -132,6 +138,11 @@ const routes: Routes = [
   },
   {
     path: 'getAllRequest',
+    canActivate: [AuthGuard],
+    component: GetallRequestComponent,
+  },
+  {
+    path: 'requestList/:status',
     canActivate: [AuthGuard],
     component: GetallRequestComponent,
   },
