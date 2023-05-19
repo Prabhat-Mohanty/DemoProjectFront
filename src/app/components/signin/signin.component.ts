@@ -70,6 +70,7 @@ export class SigninComponent {
           localStorage.removeItem('role');
           localStorage.setItem('role', this.checkLoggedInRole());
           this.dialog.closeAll();
+          this.auth.getEmail();
           this.router.navigate(['']);
         }
       },

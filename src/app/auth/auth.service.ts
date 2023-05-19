@@ -4,7 +4,6 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import jwt_decode from 'jwt-decode';
 import { BookService } from '../service/book.service';
 import { environment } from 'src/environments/environment';
-// import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +12,22 @@ export class AuthService {
   isVisible = new Subject<boolean>();
   isLogged = new BehaviorSubject<boolean>(this.isLoggedIn());
   isAdmin = new BehaviorSubject<any>(this.isAdminLoggedIn());
+  checkLoggedInEmail = new BehaviorSubject<string>(this.getEmail());
+
+  getEmail() {
+    const token = localStorage.getItem('token');
+    if (token != null) {
+      const decode = jwt_decode(token);
+      if (decode != null) {
+        const arr = Object.entries(decode).map(([key, value]) => ({
+          [key]: value,
+        }));
+        console.log(Object.values(arr[0]).join(' '));
+        return Object.values(arr[0]).join(' ');
+      }
+    }
+    return '';
+  }
 
   constructor(private http: HttpClient, private bookService: BookService) {}
   baseUrl: string = environment.authenticateController;

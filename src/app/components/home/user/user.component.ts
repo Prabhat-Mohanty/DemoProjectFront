@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-user',

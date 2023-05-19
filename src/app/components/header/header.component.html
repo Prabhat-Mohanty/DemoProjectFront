@@ -111,6 +111,7 @@
           <div class="nav-btn">
             <a routerLink="signin" class="box-btn">Sign In</a>
           </div> -->
+          <p *ngIf="isLogged">{{userEmail}}</p>
           <div class="nav-btn" *ngIf="isLogged == true">
             <ul class="navbar-nav text-right" style="text-align: end;">
               <li class="nav-item">
