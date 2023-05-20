@@ -70,8 +70,12 @@ export class SigninComponent {
           localStorage.removeItem('role');
           localStorage.setItem('role', this.checkLoggedInRole());
           this.dialog.closeAll();
-          this.auth.getEmail();
-          this.router.navigate(['']);
+          this.auth.checkLoggedInEmail.next(this.auth.getEmail());
+          if (this.checkLoggedInRole() == 'Admin') {
+            this.router.navigate(['/adminDasboard']);
+          } else {
+            this.router.navigate(['']);
+          }
         }
       },
       (error: any) => {

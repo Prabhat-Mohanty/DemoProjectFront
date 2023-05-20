@@ -27,7 +27,7 @@ export class CategoryComponent implements OnInit, AfterViewInit {
   books: any;
   imageSrc = '/bookImages/B1/10minutes.jpg';
   isChecked = false;
-
+  searchResultCount: number = 0;
   issuedbook: any;
 
   @ViewChild('myinput') myinput: ElementRef<HTMLInputElement> =
@@ -253,6 +253,7 @@ export class CategoryComponent implements OnInit, AfterViewInit {
       .subscribe(
         (res: any) => {
           this.books = res;
+          this.searchResultCount = Object.keys(res).length;
         },
         (error) => {
           console.log(error.error);
@@ -323,6 +324,7 @@ export class CategoryComponent implements OnInit, AfterViewInit {
     this.book.getBooksByGenre(genre, '', this.filterObj).subscribe(
       (data) => {
         this.books = data;
+        console.log(this.books);
       },
       (error) => {
         console.log(error);

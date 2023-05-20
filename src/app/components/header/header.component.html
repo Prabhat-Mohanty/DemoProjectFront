@@ -50,7 +50,7 @@
           </button>
           <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
             <ul class="navbar-nav text-left">
-              <li class="nav-item">
+              <li class="nav-item" *ngIf="isAdmin != 'Admin'">
                 <a routerLink="" class="nav-link">Home</a>
               </li>
               <li class="nav-item" *ngIf="isLogged == true && isAdmin == 'Admin'">
@@ -101,7 +101,7 @@
                 <a routerLink="contact-list" class="nav-link">Contact Request</a>
               </li>
               <li class="nav-item">
-                <a routerLink="contactus" class="nav-link" *ngIf="isAdmin != 'Admin'">Contact </a>
+                <a routerLink="contactus" class="nav-link" *ngIf="isLogged != true">Contact </a>
               </li>
             </ul>
           </div>
@@ -111,8 +111,8 @@
           <div class="nav-btn">
             <a routerLink="signin" class="box-btn">Sign In</a>
           </div> -->
-          <p *ngIf="isLogged">{{userEmail}}</p>
-          <div class="nav-btn" *ngIf="isLogged == true">
+          <p *ngIf="isLogged">{{isAdmin != 'Admin' ? userEmail : 'Admin'}}</p>
+          <div class="nav-btn" *ngIf="isLogged == true" style="width: 50px;">
             <ul class="navbar-nav text-right" style="text-align: end;">
               <li class="nav-item">
                 <i class="fa-solid fa-user fa-2xl" style="color: #ffffff;"></i>
@@ -131,7 +131,7 @@
             </ul>
           </div>
           <!-- <p *ngIf="isLogged == true">{{isLoggedInUsername}}</p> -->
-          <div class="nav-btn" *ngIf="!isLogged">
+          <div class="nav-btn" *ngIf="!isLogged" style="width: 50px;">
             <ul class="navbar-nav text-right">
               <li class="nav-item">
                 <i class="fa-solid fa-user fa-2xl" style="color: #ffffff;"></i>
