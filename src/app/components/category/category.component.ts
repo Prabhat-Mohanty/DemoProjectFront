@@ -254,6 +254,7 @@ export class CategoryComponent implements OnInit, AfterViewInit {
         (res: any) => {
           this.books = res;
           this.searchResultCount = Object.keys(res).length;
+          console.log(this.searchResultCount);
         },
         (error) => {
           console.log(error.error);
