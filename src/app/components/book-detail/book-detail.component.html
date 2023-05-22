@@ -69,7 +69,7 @@
                 Cost
               </div>
               <div *ngIf="book.description.length > 0" class="ps-2 discription">
-                {{book.bookCost}}
+                {{book.bookCost}} per day
               </div>
             </div>
             <div class="col-lg-6">
@@ -117,6 +117,7 @@
                 <button type="button" (click)="increment()" class="ms-1"><i class="fa-solid fa-plus"></i></button>
               </div>
               <input type="hidden" name="BookId" [value]="book.id" [(ngModel)]="book.id">
+              <p *ngIf="days > 0" class="my-1">Amount to pay {{days * book.bookCost}}</p>
               <button type="submit" [routerLink]="" [disabled]="days == 0 ? true: false"
                 class="box-btn rent mx-1 mt-4 mb-5">Apply for
                 rent</button>

@@ -25,7 +25,8 @@
         <button (click)="decrement()" class="btn btn-sm btn-primary me-1"
           [disabled]="filterObj.pageNumber == 1">Prev</button>
         <span>{{filterObj.pageNumber}}</span>
-        <button (click)="increment()" class="btn btn-sm btn-primary ms-1">Next</button>
+        <button (click)="increment()" [disabled]="filterObj.pageNumber == 1"
+          class="btn btn-sm btn-primary ms-1">Next</button>
         <!-- ----Pagination---- -->
       </div>
       <div class="container mt-5 ms-3">

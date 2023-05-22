@@ -164,3 +164,7 @@ hr::after {
   color: #9f3434;
   margin-top: 208px;
 }
+
+.border-light {
+  width: 150px;
+}
